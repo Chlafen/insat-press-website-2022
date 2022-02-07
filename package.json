@@ -1,0 +1,23 @@
+{
+  "name": "insat-press-website-2022",
+  "version": "1.0.0",
+  "description": "Insat Press club's beautiful website ♥.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chlafen/insat-press-website-2022.git"
+  },
+  "author": "Med Amine Bouchnak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Chlafen/insat-press-website-2022/issues"
+  },
+  "homepage": "https://github.com/Chlafen/insat-press-website-2022#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
+}
