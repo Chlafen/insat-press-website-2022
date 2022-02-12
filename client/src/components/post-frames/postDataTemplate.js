@@ -1,9 +1,13 @@
-const postDataTemplate = {
+const postDataTemplate =  {
   title: '',
   category: '',
   timeOfPost: new Date(),
   author: '',
-  description: ''
+  description: '',
+  img: {
+    imgUrl:'',
+    alt:''
+  }
 }
 
 export default postDataTemplate;
