@@ -1,19 +1,28 @@
 import './App.css';
 import React from "react";
+import Header from './components/header/Header';
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import Home from './pages/home/Home';
+// import OurTeam from './pages/ourTeam/OurTeam';
+
 
 function App() {
-  const [data, setData] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
-
   return (
-    <div className="App">
-      {data?data:"wait"}
-    </div>
+    <Router>
+      <div className="App">
+        <Header displayTop="true"/>
+        <div className="content">
+          <Switch>
+            <Route exact path="/">
+              <Home/>
+            </Route>
+            {/* <Route path="/ourTeam">
+              <OurTeam/>
+            </Route> */}
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 

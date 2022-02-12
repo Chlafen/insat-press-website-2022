@@ -1,0 +1,36 @@
+.header-left{
+  display:flex;
+}
+.header-left>p{
+  position: relative;
+}
+
+.header-left>p::after{
+  content: "";
+  display: block;
+  
+  position: absolute;
+  right: -4px;
+  top: 0;
+
+  width: 2px;
+  height:100%;
+
+  opacity: 0;
+  background-color:white;
+
+  animation-name: clignotte;
+  animation-duration: 0.5s;
+  animation-timing-function:cubic-bezier(0.39, 0.575, 0.565, 1);
+  animation-iteration-count: infinite;
+  
+}
+
+@keyframes clignotte {
+from{
+  opacity: 1;
+}
+to{
+  opacity: 0;
+}
+}

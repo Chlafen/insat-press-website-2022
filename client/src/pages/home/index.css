@@ -1,0 +1,8 @@
+.home{
+  height: 2000px;
+  background-color:yellow ;
+}
+.home img{
+  height:100vh;
+  object-fit:cover;
+}
