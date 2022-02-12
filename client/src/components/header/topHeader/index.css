@@ -1,0 +1,32 @@
+
+.top-header {
+  padding: clamp(4px, 1vw , 20px) 0px;
+  display:grid;
+  grid-template-columns: 2fr 1fr 2fr;
+  justify-content: space-between;
+  align-items: center;
+  grid-column-gap: 10px;
+  
+}
+
+.header-center {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-center   img {
+  width: clamp(50px, 5vw, 80px);
+}
+.header-center a{
+  padding:0;
+}
+
+.header-right{
+  display:flex;
+  flex-direction: row-reverse;
+}
+
+.header-right>p>span{
+  font-weight:800;
+}

@@ -1,0 +1,40 @@
+.header {
+  position:fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 0 200px;
+  max-height: 400px;
+  background-color: rgba(0, 0, 0, 0.336);
+  font-size: clamp(0.8rem, 0.6000rem + 0.8000vw, 1rem);;
+  font-family: Karla;
+  backdrop-filter: blur(15px);
+  color: white;
+}
+
+
+.header >hr{
+  width:200vw;
+  transform:translate(-200px);
+  filter: blur(2px);
+  margin: clamp(2px, 0.8vw + 0.2rem , 7px) 0;
+}
+
+@media screen and (max-width:1200px) {
+    .header{
+        padding: 0 5vw;
+    }
+}
+
+@media screen and (max-width:800px) {
+  .header > hr {
+    display: none;
+  }
+  .header{
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

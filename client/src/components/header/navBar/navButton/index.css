@@ -1,0 +1,9 @@
+.navbutton {
+  padding: clamp(8px, 2vw, 19.5px);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.navbutton >p{
+  margin:0;
+  font-size: clamp(0.8rem, 0.7000rem + 0.4000vw, 0.9rem);
+}

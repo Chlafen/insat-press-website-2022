@@ -1,3 +1,20 @@
+:root{
+  --max-responsive-width:800px;
+  --clr-red: #BE2623;
+  --clr-blue: #0D3745;
+  --clr-green: #00B31E;
+}
+
+*,
+*::after,
+*::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
