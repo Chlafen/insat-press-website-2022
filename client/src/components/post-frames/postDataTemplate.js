@@ -3,7 +3,13 @@ const postDataTemplate = {
   category: '',
   timeOfPost: new Date(),
   author: '',
-  description: ''
+  description: '',
+  img: {
+    imgurl: '',
+    alt: ''
+  },
+  views: 0,
+  comments: 0
 }
 
 export default postDataTemplate;
