@@ -1,6 +1,6 @@
 
 .top-header {
-  padding: clamp(4px, 1vw , 20px) 0px;
+  padding: 7px 0 0 0 ;
   display:grid;
   grid-template-columns: 2fr 1fr 2fr;
   justify-content: space-between;

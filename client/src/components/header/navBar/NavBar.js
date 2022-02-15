@@ -36,9 +36,9 @@ export default function NavBar() {
         <Link className="link-nav" to='/'><li>Gallery</li></Link>
         <Link className="link-nav" to='/'>
           <li className='dropdown-menu'>
-            Categories &nbsp;
+            <div style={{display:'flex','align-items': 'center'}}>Categories &nbsp;
             <FaAngleDown/>
-            
+            </div>
             <ul className="sub-menu">
 
               <Link className="link-nav" to='/'><li>Uni life</li></Link>

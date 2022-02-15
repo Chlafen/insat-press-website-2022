@@ -5,7 +5,12 @@
   text-align:left;
   gap: clamp(5px, 2vw, 15px); */
   position: relative;
-  padding: clamp(0px, 1vw, 10px)0px;
+  /* padding: clamp(0px, 1vw, 10px)0px; */
+}
+@-moz-document url-prefix(){
+  .nav-bar{
+    background-color:rgb(46, 46, 46);
+  }
 }
 
 .nav-bar a{
@@ -81,8 +86,9 @@ nav{
 .dropdown-menu{
   position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 
@@ -154,6 +160,7 @@ nav{
     backdrop-filter: blur(85px);
     
   }
+  
   .close-menu > .nav-logo> img {
     width: clamp(50px, 5vw, 80px);
     display: block;
@@ -190,12 +197,15 @@ nav{
   }
 
   .nav-bar{
-    /* padding: calc((0.8rem, 0.7000rem + 0.4vw , 1rem) + clamp(1.5rem, 0.8rem + 1vw,2rem)); */
-    /* position:absolute; */
     background-color: rgba(0, 0, 0, 0.452);
     z-index:10;
     width:100vw;
     left: 0;
+  }
+  @-moz-document url-prefix(){
+    .nav-bar{
+      background-color:rgb(30, 30, 29);
+    }
   }
   .close-menu {
     width: 100%;
@@ -214,7 +224,7 @@ nav{
     height:100vh;
     width:40vw;
     flex-direction: column;
-    background-color: rgb(43, 43, 43);
+    background-color:rgb(27, 27, 27);
     align-items: initial;
     z-index: 1000;
     overflow:scroll;
