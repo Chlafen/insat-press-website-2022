@@ -10,17 +10,29 @@
   font-family: Karla;
   backdrop-filter: blur(15px);
   color: white;
+  z-index: 9999;
 }
 
+@-moz-document url-prefix(){
+  .header{
+    background-color:rgb(46, 46, 46);
+  }
+  .nav-bar{
+    background-color:rgb(46, 46, 46);
+  }
+}
 
 .header >hr{
   width:200vw;
   transform:translate(-200px);
-  filter: blur(2px);
+  filter: blur(1px);
+  height: 1px;
+  border-width: 0;
+  background-color:white;
   margin: clamp(2px, 0.8vw + 0.2rem , 7px) 0;
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width:1240px) {
     .header{
         padding: 0 5vw;
     }
