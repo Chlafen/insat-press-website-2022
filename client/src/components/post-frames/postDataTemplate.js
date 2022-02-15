@@ -1,4 +1,4 @@
-const postDataTemplate = {
+const postDataTemplate =  {
   title: '',
   category: '',
   timeOfPost: new Date(),
@@ -9,7 +9,8 @@ const postDataTemplate = {
     alt: ''
   },
   views: 0,
-  comments: 0
+  comments: 0,
+  id: ''
 }
 
 export default postDataTemplate;

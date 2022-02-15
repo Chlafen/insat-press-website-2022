@@ -1,0 +1,49 @@
+.test-post-frame {
+  font-family: Domine;
+  text-align: left;  
+  max-width: 300px;
+
+}
+.text-white{
+  color:white;
+}
+.test-post-category{
+  display:flex;
+  align-items: center;
+  justify-content:flex-start;
+  gap: 0.3rem;
+}
+
+.test-post-category-circle {
+  width:0.7rem;
+  height:0.7rem;
+  border-radius:50%;
+  background-color: var(--clr-red);
+}
+
+.test-post-category > p{
+  font-family: Karla;
+  font-size: clamp(0.68rem, 0.6435rem + 0.1705vw, 0.75rem);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.test-post-title {
+  font-weight: bold;
+  padding: clamp(0.45rem, 0.3586rem + 0.4262vw, 0.625rem) 0;
+}
+
+.test-post-time-auth{
+  font-size: clamp(0.68rem, 0.6435rem + 0.1705vw, 0.82rem);
+
+}
+
+.post-time-since{
+  font-weight: lighter;
+}
+
+.test-post-time-auth > .post-author{
+  color: var(--clr-red);
+  font-weight: bold;
+  font-size: clamp(0.7rem, 0.6086rem + 0.4262vw, 0.875rem);
+}
