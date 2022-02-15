@@ -1,0 +1,99 @@
+.progress-bar {
+  /* background-color: white; */
+  height: 2px;
+  width: 25rem;
+  display:flex;
+  justify-content: space-between;
+  z-index: 0;
+}
+
+.progress-bar-section {
+  background-color:rgb(172, 172, 172);
+  width:33%;
+  position: relative;
+}
+
+.progress-bar-section::after{
+  display: block;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: var(--clr-red);
+}
+.pg-br-s-1::after{
+  animation: filling1 18s linear infinite ;
+  
+}
+.pg-br-s-2::after{
+  animation: filling2 18s linear infinite ;
+  
+}
+.pg-br-s-3::after{
+  animation: filling3 18s linear infinite ;
+  
+}
+
+
+@keyframes filling1 {
+  0%{
+    width: 0;
+  }
+  33.33%{
+    width: 100%;
+  }
+  33.34%{
+    width: 0;
+  }
+  66.66%{
+    width: 0%;
+  }
+  100%{    
+    width: 0%;
+  }
+}
+
+@keyframes filling2 {
+  0%{
+    width: 0;
+  }
+  33.33%{
+    width: 0;
+  }
+  66.66%{
+    width: 100%;
+  }
+  66.67%{
+    width: 0;
+  }
+  100%{
+    width: 0%;
+  }
+}
+
+@keyframes filling3 {
+  0%{
+    width: 0;
+  }
+  33.33%{
+    width: 0;
+  }
+  66.66%{
+    width: 0;
+  }
+  99.9%{
+    width: 100%;
+  }
+  100%{
+    width: 0;
+  }
+}
+
+
+@media screen and (max-width: 800px) {
+  .progress-bar {
+    width: 90vw;
+  }
+}
