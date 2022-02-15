@@ -5,9 +5,12 @@ const postDataTemplate =  {
   author: '',
   description: '',
   img: {
-    imgUrl:'',
-    alt:''
-  }
+    imgurl: '',
+    alt: ''
+  },
+  views: 0,
+  comments: 0,
+  id: ''
 }
 
 export default postDataTemplate;
