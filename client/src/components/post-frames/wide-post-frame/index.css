@@ -1,0 +1,82 @@
+.wide-post-container{
+    width: 28vw;
+    height: 480px; /** TODO: Change */
+    background-color: #fff;
+    font-family: Karla;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.wide-post-img{
+    width: 100%;
+    height: 50%;
+}
+
+.wide-post-img > img{
+    width: 100%;
+    height: 100%;
+}
+
+.wide-post-title{
+    font-family: Domine;
+    color: #000000;
+    font-size: clamp(1.1rem, -0.1197rem + 1.8779vw, 2.2rem);
+}
+
+.wide-post-desc{
+    color: #696969;
+    font-size: clamp(0.8rem, -0.1197rem + 1.8779vw, 1rem);
+}
+
+.wide-post-postby{
+    font-size: clamp(0.8rem, -0.1197rem + 1.8779vw, 1rem);
+}
+
+.wide-post-time{
+    color: #C4C4C4;
+}
+
+.wide-post-auth{
+    color: #BE2623;
+}
+
+.wide-post-postby{
+    display: flex;
+    flex-direction: row;
+}
+
+.wide-post-stats{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-start;
+    width: clamp(150px, 50%, 200px);
+    margin-left: 1%;
+    font-size: clamp(0.8rem, -0.1197rem + 1.8779vw, 1rem);
+
+}
+
+.wide-post-stats-icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 9%;
+    width: 40%;
+}
+
+.wide-post-info{
+    height: 50%;
+    padding-top: 4%;
+    padding-bottom: 8%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+@media screen and (max-width:600px) {
+    .wide-post-container{
+        width: 100%;
+        height: 350px;
+    }
+}

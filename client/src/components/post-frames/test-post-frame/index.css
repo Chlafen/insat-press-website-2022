@@ -1,7 +1,7 @@
 .test-post-frame {
   font-family: Domine;
   text-align: left;  
-  width: 300px;
+  max-width: 300px;
 
 }
 .text-white{
