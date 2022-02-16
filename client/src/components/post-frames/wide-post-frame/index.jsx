@@ -13,7 +13,7 @@ const WidePostFrame = (props) => {
         </div>
         <div className='wide-post-desc'>
         {(()=>{
-          let len=134;
+          let len=100;
           if(window.innerWidth < 620) len = 100;
           return props.post.description.length >  len ? props.post.description.slice(0, len) + "...": props.post.description;
         })()}

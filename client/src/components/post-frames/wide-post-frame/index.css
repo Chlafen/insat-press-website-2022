@@ -53,6 +53,8 @@
     justify-content: flex-start;
     width: clamp(150px, 50%, 200px);
     margin-left: 1%;
+    font-size: clamp(0.8rem, -0.1197rem + 1.8779vw, 1rem);
+
 }
 
 .wide-post-stats-icon{
