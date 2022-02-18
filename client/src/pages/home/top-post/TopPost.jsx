@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import './index.css';
 import LatestNews from './latest-news/LatestNews';
 import ProgressBar from './progress-bar/ProgressBar';
-
+import TopPostMain from './top-post-main/TopPostMain';
 
 const maxWidthToPopLatesNews = 800;
 
@@ -17,14 +17,20 @@ export default function TopPost(props) {
     return () => window.removeEventListener('resize', handleResize);
   });
 
+
+  
+
   const listData =[props.postData,props.postData,props.postData];
   return (
-    <div className="top-post" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}images/post4.jpg)` /* TODO: change this to be a post img url*/}}>
-      <div className="mid-section">
-        <ProgressBar/>
-        {clientWidth >maxWidthToPopLatesNews && <LatestNews postData={listData}/>}
+    <>
+        <div className="top-post" style={{ backgroundImage: `url(${process.env.PUBLIC_URL}images/post4.jpg)` /* TODO: change this to be a post img url*/}}>
+        <div className="mid-section">
+          <TopPostMain postData={listData[0]}/>
+          <ProgressBar/>
+          {clientWidth >maxWidthToPopLatesNews && <LatestNews postData={listData}/>}
+        </div>
       </div>
       {clientWidth <=maxWidthToPopLatesNews && <LatestNews postData={listData} style={{"margin-top":".3rem"}}/>}
-    </div>
+    </>
   )
 }

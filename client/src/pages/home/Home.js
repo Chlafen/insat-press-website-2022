@@ -1,32 +1,26 @@
 import React from 'react';
 import './index.css';
-import imag from './img.jpg';
-import WidePostFrame from '../../components/post-frames/wide-post-frame';
+import TopPost from './top-post/TopPost'
 
 const postData = {
-  title: 'Lorem ipsum dolor sit amet, consectetur aad byea',
+  title: 'Project Axis, a new axis newly created by IEEE INSAT',
   category: 'Football',
   timeOfPost: new Date(),
   author: 'Nessrine Baltouni',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
   img: {
-    imgurl: 'post-pic/post1.jpg',
+    imgUrl: 'images/post1.jpg',
     alt: 'A picture'
   },
   views: 158,
-  comments: 15
+  comments: 15,
+  url: '/'
 }
 
 const Home = () => {
   return (
     <div className="home">
-      <img src={imag} alt="?" width="100%" height="100vh"/>
-
-      <div className='wide-post-display'>
-      <WidePostFrame post={postData} />
-      <WidePostFrame post={postData} />
-      <WidePostFrame post={postData} />
-      </div>
+      <TopPost postData={postData}/>
     </div>
   );
 }

@@ -5,6 +5,7 @@
   display:flex;
   justify-content: space-between;
   z-index: 0;
+  transform:translateY(2rem)
 }
 
 .progress-bar-section {
@@ -94,6 +95,7 @@
 
 @media screen and (max-width: 800px) {
   .progress-bar {
-    width: 90vw;
+    width: 95vw;
+    transform: translateY(-2px);
   }
 }
