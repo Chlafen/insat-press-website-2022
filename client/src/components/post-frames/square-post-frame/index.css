@@ -4,7 +4,6 @@
   background-color: #fff;
   text-align:left;
   color: black;
-  max-width: 400px;
   cursor:pointer;
 }
 
@@ -52,5 +51,8 @@
   .square-post-frame-img>img {
     width:  clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem);
     height: clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem);
+  }
+  .square-post-frame-text {
+    font-size: clamp(0.9rem, 0.0818rem + 3.6364vw, 1.9rem);
   }
 }
