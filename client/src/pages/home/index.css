@@ -1,24 +1,3 @@
 .home{
-  height: 2000px;
-  background-color:yellow ;
-}
-.home>img{
-  height:100vh;
-  object-fit:cover;
-}
-
-.wide-post-display{
-  margin-left: auto;
-  margin-right: auto;
-  width: 90vw;
-  background-color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-
-
-@media screen and (max-width:600px) {
-  .wide-post-display{
-      flex-wrap: wrap;
-  }
+  height:3000px;
 }
