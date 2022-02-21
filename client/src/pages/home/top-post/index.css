@@ -8,6 +8,8 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  position: relative;
+  overflow: hidden;
 }
 
 
@@ -32,7 +34,22 @@
   grid-row: -2/ -3;
   grid-column: 1 / -1;
   align-self: end;
+  position: relative;
   justify-self: center;
+  height: 1px;
+  width: 25rem;
+  background-color:rgb(172, 172, 172);
+  z-index: 0;
+}
+
+#evolving-bar {
+  background-color: var(--clr-red);
+  width: 33.333%;
+  height: 3px;
+  position: absolute;
+  left: 0;
+  top: -1px;
+  transition: left 0.8s ease-in-out ;
 }
 
 .latest-news {
@@ -41,12 +58,65 @@
   grid-column: 1 / 5;
 }
 
+.slide {
+  opacity: 0; 
+  transition: all 1s ease;
+  position:absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  object-fit:cover;
+}
 
+.slide.active {
+  transition: opacity 1s ease;
+  transition: transform 6s ease-in-out;
+  transform:scale(1.08);
+  z-index: 0;
+  opacity: 1;
+}
 
+.slide.active::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color:rgba(0, 0, 0, 0.548);
+  left: 0;
+}
+
+.slider-img {
+  z-index: -1;
+  object-fit:cover;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-txt {
+  transition: opacity 0.3s ease;
+  opacity: 0;
+  display:none;
+  transform: scale(0);
+  position: absolute;
+}
+
+.slide-txt.fade-in {
+  transition: opacity 0.3s ease .5s;
+  transform: scale(1);
+  position:static;
+  opacity: 1;
+} 
 
 @media screen and (max-width: 1500px) {
   .latest-news{
     grid-column: 1 / 6;
+  }
+  .top-post-main {
+    grid-column: 1 / -2;
   }
 }
 
@@ -76,8 +146,14 @@
   .progress-bar {
     align-self: center;
     justify-self: end;
-    width: 80vw;
+    width: 100vw;
   }
+  
+  #evolving-bar {
+    top: -3px;
+    height: 3px;
+  }
+
   .top-post-main {
     grid-column: 1 / -1;
     grid-row: 1/-2;
