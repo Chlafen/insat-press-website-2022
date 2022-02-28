@@ -1,8 +1,7 @@
 .test-post-frame {
   font-family: Domine;
   text-align: left;  
-  max-width: 300px;
-
+  color: black;
 }
 .text-white{
   color:white;
@@ -23,18 +22,24 @@
 
 .test-post-category > p{
   font-family: Karla;
-  font-size: clamp(0.68rem, 0.6435rem + 0.1705vw, 0.75rem);
+  font-size: clamp(0.6rem, 0.6435rem + 0.1705vw, 0.75rem);
   font-weight: bold;
   text-transform: uppercase;
 }
 
+.test-post-title:hover{
+  color: var(--clr-red);
+}
+
 .test-post-title {
   font-weight: bold;
+  transition: color 0.3s ease;
   padding: clamp(0.45rem, 0.3586rem + 0.4262vw, 0.625rem) 0;
+  font-size: clamp(0.8rem, 0.6071rem + 0.8571vw, 1.25rem);
 }
 
 .test-post-time-auth{
-  font-size: clamp(0.68rem, 0.6435rem + 0.1705vw, 0.82rem);
+  font-size: clamp(0.62rem, 0.6435rem + 0.1705vw, 0.81rem);
 
 }
 
@@ -45,5 +50,6 @@
 .test-post-time-auth > .post-author{
   color: var(--clr-red);
   font-weight: bold;
-  font-size: clamp(0.7rem, 0.6086rem + 0.4262vw, 0.875rem);
+  font-size: clamp(0.62rem, 0.6086rem + 0.4262vw, 0.875rem);
 }
+

@@ -11,7 +11,7 @@ const Testpostframe = (props) => {
   }
 
   return (
-    <div className={`test-post-frame ${props.white && "text-white"}`}>
+    <a href={props.postData.url} className={`test-post-frame ${props.white && "text-white"}`}>
       <div className="test-post-category">
         <div className="test-post-category-circle"></div>
         <p>{props.postData.category}</p>
@@ -25,7 +25,7 @@ const Testpostframe = (props) => {
           {props.postData.author}
         </span>
       </div>
-    </div>
+    </a>
   );
 }
 

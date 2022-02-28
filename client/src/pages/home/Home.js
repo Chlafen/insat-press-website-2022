@@ -1,6 +1,8 @@
 import React from 'react';
 import './index.css';
 import TopPost from './top-post/TopPost'
+import HeadPosts from './head-posts/HeadPosts';
+
 
 const postData = {
   title: 'Project Axis, a new axis newly created by IEEE INSAT',
@@ -9,7 +11,7 @@ const postData = {
   author: 'Nessrine Baltouni',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
   img: {
-    imgUrl: 'images/post1.jpg',
+    imgUrl: 'images/post3.jpg',
     alt: 'A picture'
   },
   views: 158,
@@ -21,6 +23,7 @@ const Home = () => {
   return (
     <div className="home">
       <TopPost postData={postData}/>
+      <HeadPosts postData={postData}/>
     </div>
   );
 }
