@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 import TopPost from './top-post/TopPost'
 import HeadPosts from './head-posts/HeadPosts';
-
+import SliderStories from './slider-stories/SliderStories';
 
 const postData = {
   title: 'Project Axis, a new axis newly created by IEEE INSAT',
@@ -24,6 +24,7 @@ const Home = () => {
     <div className="home">
       <TopPost postData={postData}/>
       <HeadPosts postData={postData}/>
+      <SliderStories/>
     </div>
   );
 }
