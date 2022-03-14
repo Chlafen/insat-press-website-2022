@@ -4,7 +4,7 @@ import Header from './components/header/Header';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from './pages/home/Home';
 // import OurTeam from './pages/ourTeam/OurTeam';
-
+import Footer from './components/footer/Footer';
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
             </Route> */}
           </Switch>
         </div>
+        <Footer/>
       </div>
     </Router>
   );

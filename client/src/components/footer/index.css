@@ -1,0 +1,38 @@
+.footer{
+  background-color: #371010;
+  height: max-content;
+  color: white;
+  font-family: Karla;
+  margin-top: 2rem ;
+  padding: 0.6rem 120px;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.8rem, 0.6875rem + 0.5000vw, 1rem);
+  font-size: clamp(0.7rem, 0.5312rem + 0.7500vw, 1rem);
+}
+
+.logo-footer>img {
+  border: 1px solid rgba(255, 255, 255, 0.527);
+  height:clamp(3rem, 1.0938rem + 6.2500vw, 5rem);
+  width: clamp(3rem, 1.0938rem + 6.2500vw, 5rem);
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.footer-sep {
+  height: 1px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.527);
+}
+
+.contact-footer>span{
+  font-weight: BOLD;
+}
+
+@media screen and (max-width:1240px) {
+  .footer {
+    padding: 1rem;
+  }
+}

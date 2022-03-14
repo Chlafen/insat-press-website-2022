@@ -2,7 +2,7 @@ import React from 'react';
 import postDataTemplate from '../postDataTemplate';
 import './index.css'
 import {timeSince} from '../../../util/utilities'
-
+import {AiFillPlayCircle} from 'react-icons/ai'
 
 export default function SquarePostFrame(props) {
 
@@ -16,6 +16,11 @@ export default function SquarePostFrame(props) {
   return (
     <a className="square-post-frame" href={props.postData.url}>
       <div className="square-post-frame-img">
+        {
+        props.isVideo? 
+          (<AiFillPlayCircle className='play-btn' color='var(--clr-red)' size='30%'/>)
+          :''
+        }
         <img src={props.postData.img.imgUrl || ''} alt={props.postData.img.imgAlt || ''} />
       </div>
       <div className="square-post-frame-text">

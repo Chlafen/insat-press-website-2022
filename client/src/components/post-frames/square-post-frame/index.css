@@ -10,7 +10,7 @@
 .square-post-frame-img{
   display: flex;
   transition: filter 170ms ease-in-out;
-
+  position: relative;
 }
 
 .square-post-frame-img>img{
@@ -45,6 +45,16 @@
 
 .square-post-frame:hover > .square-post-frame-img {
   filter:brightness(80%)
+}
+
+.play-btn {
+  position: absolute;
+  top:    35%;
+  bottom: 35%;
+  right:  35%;
+  left:   35%;
+  background-color: white;
+  border-radius: 50%;
 }
 
 @media screen and (max-width:800px) {

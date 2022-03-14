@@ -3,6 +3,10 @@ import './index.css';
 import TopPost from './top-post/TopPost'
 import HeadPosts from './head-posts/HeadPosts';
 import SliderStories from './slider-stories/SliderStories';
+import Section3 from './section-3/Section3';
+import SectionTitle from '../../components/section-title/SectionTitle';
+import Category from '../../components/category/Category';
+import SectionPosts from '../../components/section-posts/SectionPosts';
 
 const postData = {
   title: 'Project Axis, a new axis newly created by IEEE INSAT',
@@ -25,6 +29,19 @@ const Home = () => {
       <TopPost postData={postData}/>
       <HeadPosts postData={postData}/>
       <SliderStories/>
+      <Section3 postData={postData}/>
+      <SectionTitle title='CATEGORIES'/>
+      <Category category={'Science'}/>
+      <SectionPosts/>
+      <Category category={'Culture'}/>
+      <SectionPosts/>
+      <Category category={'Sports'}/>
+      <SectionPosts/>
+      <Category category={'Uni life'}/>
+      <SectionPosts/>
+      <div className='invisible-v-spacer'>
+
+      </div>
     </div>
   );
 }

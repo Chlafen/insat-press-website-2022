@@ -1,0 +1,26 @@
+.section-title{
+  display: flex;
+  margin: 0 120px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--clr-red);
+  font-family: Domine;
+  font-weight: bold;
+  font-size: clamp(1.3rem, 0.8091rem + 2.1818vw, 2.5rem);
+
+  gap: 3rem;
+}
+
+.horizontal-sep-title {
+  height: 1px;
+  width: 100%;
+  background-color: rgb(177, 177, 177);
+}
+
+@media screen and (max-width:1240px) {
+  .section-title {
+    margin: 0 1rem;
+    gap:3vw;
+  }
+}

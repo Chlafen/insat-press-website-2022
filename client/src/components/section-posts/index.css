@@ -1,0 +1,28 @@
+.section-posts{
+  display:flex;
+  margin: 0 120px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+@media screen and (max-width: 1240px) {
+  .section-posts{
+    margin: 0 1rem;
+  } 
+}
+
+@media screen and (max-width:800px) {
+  .section-posts{
+    margin: .5rem;
+  }
+  
+}
+
+@media screen and (max-width:700px) {
+  .section-posts{
+    flex-direction: column;
+  }
+  
+}
