@@ -1,0 +1,14 @@
+.error-404 {
+  font-size: 3rem;
+  font-family: Karla;
+  font-weight: bold;
+  color: gray;
+  letter-spacing: 0.11em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-direction: column;
+  padding:   5rem 3rem;
+  min-height: 100%;
+}

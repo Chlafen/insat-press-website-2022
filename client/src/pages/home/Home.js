@@ -23,25 +23,39 @@ const postData = {
   url: '/'
 }
 
+
+
 const Home = () => {
+
+  const nbOfCats = 4;
+  const categPosts = [postData, postData, postData, postData];
+  const categories = ['Science', 'Culture', 'Sports', 'Uni life'];
+
   return (
     <div className="home">
       <TopPost postData={postData}/>
       <HeadPosts postData={postData}/>
       <SliderStories/>
       <Section3 postData={postData}/>
-      <SectionTitle title='CATEGORIES'/>
-      <Category category={'Science'}/>
-      <SectionPosts/>
-      <Category category={'Culture'}/>
-      <SectionPosts/>
-      <Category category={'Sports'}/>
-      <SectionPosts/>
-      <Category category={'Uni life'}/>
-      <SectionPosts/>
-      <div className='invisible-v-spacer'>
 
-      </div>
+      <SectionTitle title='CATEGORIES'/>
+
+      <Category isLink={true} category={categories[0]}/>
+      <SectionPosts postData={categPosts}/>
+
+      <Category isLink={true} category={categories[1]}/>
+      <SectionPosts postData={categPosts}/>
+
+      <Category isLink={true} category={categories[2]}/>
+      <SectionPosts postData={categPosts}/>
+
+      <Category isLink={true} category={categories[3]}/>
+      <SectionPosts postData={categPosts}/>
+      <div className='invisible-v-spacer'></div>
+
+      <div id="fb-root"></div>
+      <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0" nonce="bTsJERE5"></script>
+      <div className="fb-comments" data-href="http://localhost:3000/" data-width="" data-numposts="4"></div>
     </div>
   );
 }

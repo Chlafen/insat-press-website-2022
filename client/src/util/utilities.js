@@ -1,3 +1,6 @@
+import {useLocation} from "react-router-dom";
+import React from "react";
+
 export function timeSince(date) {
 
   let seconds = Math.floor((new Date() - date) / 1000);
@@ -24,4 +27,26 @@ export function timeSince(date) {
     return Math.floor(interval) + " minutes";
   }
   return Math.floor(seconds) + " seconds";
+}
+
+export function DDMMYYYY(date) {
+  const yyyy = date.getFullYear();
+  let mm = date.getMonth() + 1
+  let dd = date.getDate()
+  if (dd < 10) dd = '0' + dd
+  if (mm < 10) mm = '0' + mm
+  date = dd + '/' + mm + '/' + yyyy
+  return date;
+}
+
+export function getAvgTimeToRead(text) {
+  const wpm = 225;
+  const words = text.trim().split(/\s+/).length;
+  const time = Math.ceil(words / wpm);
+  return time
+}
+
+export function useQuery() {
+  const { search } = useLocation();
+  return React.useMemo(() => new URLSearchParams(search), [search]);
 }

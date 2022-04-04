@@ -13,7 +13,7 @@
   }
 }
 
-.nav-bar a{
+.nav-bar a, .nav-list>div{
   text-decoration: none;
   font-size: clamp(0.8rem, 0.7000rem + 0.4000vw, 0.9rem);
   color: white;

@@ -35,13 +35,20 @@ function Header(props) {
     return () => window.removeEventListener('scroll', handleScroll);
   });
 
-
   return (
-    <div className='header'>
-      {(screenWidth>800 && visible) &&<TopHeader/>}
-      <hr/>
-      <NavBar/>
-      <hr/>
+    <div className='header' >
+      {props.hasBackground?
+        <div className='bgr-header-c'>
+          <img className="bgr-header" src={`${process.env.PUBLIC_URL}/banner.png`}/>
+        </div>
+        :<></>
+      }
+      <div className='wrapper-header'>
+        {(screenWidth>800 && visible) &&<TopHeader/>}
+        <hr/>
+        <NavBar/>
+        <hr/>
+      </div>
     </div>
   );   
 }

@@ -17,7 +17,7 @@ export default function TopHeader() {
     <div className="top-header">
       <ChangingText/> 
       <div className="header-center">
-        <Link to="/"><img src={process.env.PUBLIC_URL + "images/logo.png"} alt="logo press"/></Link>
+        <Link to="/"><img src={process.env.PUBLIC_URL + "/logo.png"} alt="logo press"/></Link>
       </div>
       <div className="header-right">
         <p> {"Monday "} <span >{time.substring(0, time.length - 3)}</span> {time.substring(time.length-2, time.length)==='AM'? 'a.m.' : 'p.m.'} </p>

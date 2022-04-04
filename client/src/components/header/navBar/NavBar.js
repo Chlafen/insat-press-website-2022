@@ -6,6 +6,16 @@ import { FaAngleRight, FaAngleDown, } from "react-icons/fa"
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 
 
+const categories = [
+  "Uni life",
+  "Science",
+  "Sports",
+  "Stories",
+  "Events",
+  "Culture",
+  "Society"
+];
+
 export default function NavBar() {
   const [toggleMenu, setToggleMenu] = useState(false);
   useEffect(() => {
@@ -31,29 +41,27 @@ export default function NavBar() {
       <ul className="nav-list">
         <Link className="link-nav" to='/'><li>Home</li></Link>
       
-        <Link className="link-nav" to='/'><li>Our team</li></Link>
+        <Link className="link-nav" to='/ourteam'><li>Our team</li></Link>
 
-        <Link className="link-nav" to='/'><li>Gallery</li></Link>
-        <Link className="link-nav" to='/'>
+        <Link className="link-nav" to='/gallery'><li>Gallery</li></Link>
+        <div className="link-nav">
           <li className='dropdown-menu'>
-            <div style={{display:'flex','align-items': 'center'}}>Categories &nbsp;
+            <div style={{display:'flex','alignItems': 'center'}}>Categories &nbsp;
             <FaAngleDown/>
             </div>
             <ul className="sub-menu">
-
-              <Link className="link-nav" to='/'><li>Uni life</li></Link>
-
-              <Link className="link-nav" to='/'><li>News</li></Link> 
-
-              <Link className="link-nav" to='/'><li>Science</li></Link> 
-
-              <Link className="link-nav" to='/'><li>Stories</li></Link> 
+              {
+                categories.map((c) => {
+                  return (
+                    <Link className="link-nav" to={'/category/'+c.toLowerCase().replace(/\s+/g, '')}><li>{c}</li></Link> 
+                )})
+              }
 
             </ul>
           </li>
-        </Link>
-        <Link className="link-nav" to='/'><li>Contact</li></Link>
-        <Link className="link-nav" to='/'><li>About us</li></Link>
+        </div>
+        <Link className="link-nav" to='/contact'><li>Contact</li></Link>
+        <Link className="link-nav" to='/about'><li>About us</li></Link>
         {/*profile*/}
         {/* <li>
 
