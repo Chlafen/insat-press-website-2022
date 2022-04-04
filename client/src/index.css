@@ -25,6 +25,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 body::-webkit-scrollbar {
   width: 0.5em;
 }

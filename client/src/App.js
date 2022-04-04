@@ -7,6 +7,7 @@ import Home from './pages/home/Home';
 import Footer from './components/footer/Footer';
 import Article from './pages/article/Article';
 import Error404 from './pages/error404/Error404';
+import EditorPage from './pages/editor/Editor';
 
 const categories = [ // from server
   "Uni life",
@@ -20,11 +21,6 @@ const categories = [ // from server
 
 function App() {
   const [headerTransparent, setHeaderTransparent] = useState(window.location.pathname === '/')
-
-  useEffect(() => {
-    setHeaderTransparent(window.location.pathname === '/');
-  }, [window.location.pathname]);
-
   return (
     <Router>
       <div className="App">
@@ -72,6 +68,11 @@ function App() {
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
                 return (<Article/>)}}>
+            </Route>
+            <Route exact path="/editor"
+            render={()=>{
+              setHeaderTransparent(window.location.pathname === '/');
+              return (<EditorPage/>)}}>
             </Route>
             <Route path="*"
               render={()=>{

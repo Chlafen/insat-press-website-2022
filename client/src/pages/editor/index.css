@@ -1,0 +1,130 @@
+
+.e-category{
+  position: relative;
+  text-transform: uppercase;
+  color: var(--clr-red);
+  min-width: 11rem;
+}
+
+.public-DraftStyleDefault-block{
+  font-weight: bolder !important;
+
+}
+.rdw-editor-toolbar{
+  border-radius: 0.4rem !important;
+  border-color: black !important;
+  box-shadow: 2px 2px rgb(82, 82, 82);
+}
+
+.rdw-option-wrapper{
+  border-color: black !important;
+  border-radius: 2px !important;
+  min-height: 28px;
+}
+.rdw-option-wrapper:hover, .rdw-option-active {
+  background-color: var(--clr-red) !important;
+  box-shadow: 0px 0px 0px 1px rgba(0,0,0,1) inset !important;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(0,0,0,1) inset !important;  
+  -moz-box-shadow: 0px 0px 0px 1px rgba(0,0,0,1) inset !important; 
+}
+
+.editor-class {
+  min-height: 10rem;
+}
+
+
+.rdw-editor-toolbar {
+  max-width: max-content;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.hidden{
+  display: none !important;
+}
+
+.e-title{
+  max-width: 880px;
+  min-width: 200px;
+}
+
+.rdw-editor-main 
+a:link{
+  color: var(--clr-red) ;
+}
+
+.rdw-editor-main 
+a:visited:hover,
+.rdw-editor-main 
+a:hover{
+  color: #ff4f4d;
+}
+
+.rdw-editor-main 
+a:visited{
+  color: var(--clr-red);
+}
+
+.e-title .public-DraftStyleDefault-ltr{
+  margin: 0 !important;
+}
+
+.rdw-text-align-wrapper,
+.rdw-list-wrapper,
+.rdw-inline-wrapper,
+.rdw-fontsize-wrapper,
+.rdw-link-wrapper,
+.rdw-embedded-wrapper,
+.rdw-emoji-wrapper,
+.rdw-image-wrapper,
+.rdw-remove-wrapper,
+.rdw-history-wrapper
+{
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 3px 0;
+  margin: 0 2px;
+  background-color: rgb(255, 238, 238);
+}
+
+.rdw-dropdown-selectedtext{
+  padding: 0 !important;
+}
+
+.rdw-fontsize-dropdown {
+  min-width: 45px !important;
+  padding: 3px;
+}
+.rdw-dropdown-wrapper{
+  border: 1px solid black !important;
+  margin: 0 3px !important;
+  background-color: transparent !important;
+}
+.rdw-dropdown-optionwrapper{
+  min-width:37px;
+}
+
+.z0-height{
+  min-height: 0 !important;
+}
+
+.public-DraftStyleDefault-block {
+  margin: 0 !important;
+}
+
+.post-title-editor {
+  height: max-content;
+}
+
+.rdw-image-imagewrapper > img {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  width: 100% !important;
+  aspect-ratio: calc(20/9) !important;
+  object-fit: cover !important;
+}
+
+.rdw-wrapper-2450{
+  display: flex !important;
+  flex-direction: column-reverse !important;
+}
