@@ -1,0 +1,1 @@
+This folder contains methods to get the request from the routes and convert them to HTTP responses.

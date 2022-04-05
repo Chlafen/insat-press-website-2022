@@ -107,7 +107,17 @@ export default function EditorPage(props) {
     const postData = getPostData(e);
     
     if(!postData.title || !postData.category || !postData.content ){
-      window.alert("Article still incomplete!")
+      let msg = 'Article still incomplete!\nPlease insert : \n';
+      if(!postData.title){
+        msg += 'Title\n'
+      }
+      if(!postData.category){
+        msg += 'Category\n'
+      }
+      if(!postData.content){
+        msg += 'Content\n'
+      }
+      window.alert(msg)
     }else{
       console.log(postData.content);
 
@@ -115,7 +125,7 @@ export default function EditorPage(props) {
 
       //send to server
 
-      history.push('/')
+     // history.push('/')
     }
 
     
@@ -261,8 +271,8 @@ export default function EditorPage(props) {
 
 async function uploadCallback(file)  {
   const formData = new FormData();
-  formData.append('lefile', file, file.name);
-  const uploadedImageUrl = await axios.post("upload/temp", formData);
+  formData.append('contentImg', file, file.name);
+  const uploadedImageUrl = await axios.post("tmp", formData);
   
   return new Promise((resolve) => {
     resolve({
