@@ -50,3 +50,13 @@ export function useQuery() {
   const { search } = useLocation();
   return React.useMemo(() => new URLSearchParams(search), [search]);
 }
+
+export function convertSqlDateToJsDate(sqlDate) {
+  const date = new Date(sqlDate);
+  return date;
+}
+
+export function convertJsDateToSqlDate(jsDate) {
+  const sqlDate = jsDate.toISOString().slice(0, 19).replace('T', ' ');
+  return sqlDate;
+}

@@ -1,0 +1,101 @@
+.card-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: karla;
+  border-left: 1px solid black;
+}
+
+.card {
+  gap: clamp(0.68rem, 0.5491rem + 0.5818vw, 1rem);
+  display: flex;
+  color: black;
+  flex-direction: column;
+  align-items: center;
+  min-width: min-content;
+  width: 70%;
+  position: relative;
+}
+
+.card:hover .card-name {
+  color: var(--clr-red);
+}
+
+.card-ranking {
+  position: absolute;
+  top: 0.5rem;
+  left: -1.7rem;
+  background-color: var(--clr-red);
+  transform: rotate(-45deg);
+  width: 6.4rem;
+  color: white;
+  font-family: domine;
+  padding: 5px;
+  z-index: 1;
+  border: 1px solid black;
+}
+
+.card-name {
+  font-weight: bold;
+  flex-grow: 1;
+  transition: 150ms ease;
+  font-size: clamp(1.2rem, 0.9955rem + 0.9091vw, 1.7rem);
+}
+
+.card-img {
+  object-fit: contain;
+  aspect-ratio: 1;
+  width: 12.8rem;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid black;
+  background-color: gray;
+
+}
+
+.card:hover .card-img::after,
+.card:hover .card-img::before {
+  bottom: -1px;
+}
+
+.card-img::after {
+  content: "View profile";
+  color: white;
+  font-weight: light;
+  text-align: left;
+  align-items: center;
+  display: flex;
+  padding: 0.5rem;
+  position: absolute; 
+  left: -1px;
+  
+  bottom: -2.3rem; 
+  background-color: var(--clr-red);
+  transition: 150ms ease;
+  border: 1px solid black;
+}
+
+
+.card-img > img {
+  width: 100%;
+}
+
+.card-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  justify-content: center;
+}
+.card-vl-sep{
+  width: 1px;
+  height: 1rem;
+  background-color: black;
+}
+
+.card-info svg {
+  width: 1.3rem;
+  height: 1.3rem; 
+}
