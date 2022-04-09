@@ -19,3 +19,4 @@ const UserType = connection.define(
   } 
 );
 
+module.exports = UserType;

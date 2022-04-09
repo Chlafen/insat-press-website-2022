@@ -1,6 +1,7 @@
 const connection = require('../configs/sqlize.config')
 const {Sequelize, DataTypes} = require('sequelize')
-const User = require('./user.model')
+const User = require('./user.model');
+const Attachment = require('./attachment.model');
 
 const Post = connection.define(
   "posts", 
@@ -10,14 +11,6 @@ const Post = connection.define(
       autoIncrement: true,
       primaryKey: true,
       allowNull: false,
-    },
-    author_id: {
-      references: {
-        model: User,
-        key: 'user_id',
-      },
-      allowNull: false,
-      type: DataTypes.INTEGER,
     },
     post_content : {
       type: DataTypes.TEXT('long'),
@@ -47,14 +40,12 @@ const Post = connection.define(
     type : {
       type: DataTypes.STRING(50),
       allowNull: false
-    } 
+    }
   },{
     createdAt: false,
     updatedAt: false
   }
 );
 
-
-Post.sync();
 
 module.exports = Post
