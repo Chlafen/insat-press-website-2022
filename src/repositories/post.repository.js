@@ -2,36 +2,36 @@ const { format } = require('path');
 const Sequelize = require('sequelize');
 const db = require('../configs/db.config');
 const { responseHandler } = require('../helpers/handlers');
-const { PostModel, PostTagModel, UserModel, CategoryModel, PostCategoryModel } = require('../models');
+const { PostModel, PostTagModel, UserModel, CategoryModel, PostCategoryModel, AttachmentModel } = require('../models');
 
 exports.createPost = async (newPost, result) => {
-  let transaction;
+  let trsct;
 
   try {
-    transaction = await db.transaction();
+    trsct = await db.transaction();
 
-    const tagNames = newPost.tags.split(',').map((e) => e.trim());
     //insert post
     const post = await PostModel.create({
       post_title: newPost.post_title,
       post_content: newPost.post_content,
       author_id: newPost.author_id,
-      post_edit: newPost,
+      post_edit: newPost.post_edit,
       post_date: newPost.post_date,
       view_count: 1,
       image_path: newPost.image_path,
       type: newPost.type
-    })
-      .catch((error) => {
-        console.log(error);
-        result(responseHandler(false, 500, 'Something went wrong', null), null);
-        return null;
+    }, { transaction: trsct })
+    .catch((error) => {
+      console.log(error);
+      result(responseHandler(false, 500, 'Something went wrong', null), null);
+      return null;
     });
 
-    let newTags = [];
     //filter tags
+    const tagNames = newPost.tags.map((e) => e.trim());
+    let newTags = [];
     for (const tagName of tagNames) {
-      if (!tagName && !tagName.length < 3) {
+      if (tagName && !tagName.length < 3) {
         newTags.push({
           post_id: post.post_id,
           tag_name: tagName
@@ -39,26 +39,66 @@ exports.createPost = async (newPost, result) => {
       }
     }
     //insert tags
-    await PostTagModel.bulkCreate(newTags)
+    await PostTagModel.bulkCreate(newTags, { transaction: trsct })
       .catch((error) => {
         console.log(error);
         result(responseHandler(false, 500, 'Something went wrong', null), null);
         return null;
     }); 
-    //insert attachments
 
-
-
-
-
-    result(null, responseHandler(true, 200, 'Post Created', post.id));
+    // insert attachments
+    const newAttachments = newPost.attachments.map((e) => 
+    {
+      return {
+        ...e,
+        post_id: post.post_id
+      }
+    });
+    console.log(newAttachments);
+    await AttachmentModel.bulkCreate(newAttachments, { transaction: trsct })
+      .catch((error) => { 
+        console.log(error);
+        result(responseHandler(false, 500, 'Something went wrong', null), null);
+        return null;
+      });
     
-    await transaction.commit();
+    // add relation between post and categories
+    //   -get category ids
+    const slugs = newPost.categories.map((e) => e.category_slug);
+    const cat_ids = await CategoryModel.findAll({
+      attributes: ['category_id', 'category_slug'],
+      where: {
+        category_slug: {
+          [Sequelize.Op.in]: slugs
+        }
+      },
+      raw: true
+    }); 
+
+    const newPostCategories = cat_ids.map((e, i) => {
+      //find corresponding type in newPost.categories
+      const {type} = newPost.categories.find((e) => e.category_slug === slugs[i]);
+      return {
+        post_id: post.post_id,
+        category_id: e.category_id,
+        type: type
+      }
+    });
+
+    await PostCategoryModel.bulkCreate(newPostCategories, { transaction: trsct })
+      .catch((error) => {
+        console.log(error);
+        result(responseHandler(false, 500, 'Something went wrong', null), null);
+        return null;
+      });
+    //done successfully
+    await trsct.commit();
+    result(null, responseHandler(true, 200, 'Post Created', {"post_id":post.post_id}));
   } catch (error) {
     console.log(error);
     result(responseHandler(false, 500, 'Something went wrong', null), null);
-    if (transaction) {
-      await transaction.rollback();
+    if (trsct) {
+      await trsct.rollback();
     }
   }
 

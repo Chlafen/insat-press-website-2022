@@ -10,6 +10,10 @@ const Post = function (post) {
   this.view_count = post.view_count;
   this.image_path = post.image_path;
   this.type = post.type;
+  this.author_id = post.author_id;
+  this.tags = post.tags;
+  this.categories = post.categories;
+  this.attachments = post.attachments;
 }
 
 const PostModel = db.define(
@@ -43,8 +47,9 @@ const PostModel = db.define(
       defaultValue: 0
     },
     image_path : {
-      type: DataTypes.STRING(50),
-      allowNull: false
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: 'uploads/default_post_bgr.jpg',
     },
     type : {
       type: DataTypes.STRING(50),
