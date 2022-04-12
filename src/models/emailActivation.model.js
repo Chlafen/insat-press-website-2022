@@ -1,8 +1,13 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
 
-const EmailActivation = connection.define(
+const EmailActivation = function(emailActivation) {
+    this.email_activation_token = emailActivation.email_activation_token;
+    this.expiration_date = emailActivation.email_activation_expiration;
+}
+
+const EmailActivationModel = db.define(
   "email_activations",
   {
     email_activation_id: {
@@ -16,6 +21,7 @@ const EmailActivation = connection.define(
     },
     expiration_date: {
       type: DataTypes.TIME,
+      defaultValue: DataTypes.NOW,
       allowNull: false,
     }
   },{
@@ -24,4 +30,4 @@ const EmailActivation = connection.define(
   }
 );
 
-module.exports = EmailActivation;
+module.exports = { EmailActivation, EmailActivationModel };

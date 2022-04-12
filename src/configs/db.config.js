@@ -1,10 +1,23 @@
-const env = process.env;
-const db = {
-  host: "localhost",
-  user: "root",
-  password: "Nikommha123€",
-  database: process.env.DB_NAME || 'insatprecminsatp',
-  port: env.DB_PORT || 3306
-};
+const { Sequelize } = require('sequelize'); 
+const dotenv = require('dotenv');
 
-module.exports = db;
+const config = require('./index');
+
+dotenv.config();
+
+const sequelize = new Sequelize(config.db.database, config.db.user, config.db.password, 
+  {
+    dialect: 'mysql',
+    host: config.db.host, 
+    define: {
+      timestamps: false
+    }
+  } 
+);
+
+
+
+
+(async () => await sequelize.sync().catch( err => {console.log(err);} ))();
+
+module.exports = sequelize;

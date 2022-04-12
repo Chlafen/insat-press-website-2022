@@ -1,8 +1,13 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize');
-const User = require('./user.model');
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const UserMeta = connection.define(
+
+const UserMeta = function(userMeta) {
+  this.meta_key = userMeta.meta_key;
+  this.meta_value = userMeta.meta_value;
+}
+
+const UserMetaModel = db.define(
   "users_meta",
   {
     meta_id: {
@@ -16,7 +21,7 @@ const UserMeta = connection.define(
     },
     meta_value: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     }
   },{
     createdAt: false,
@@ -24,4 +29,4 @@ const UserMeta = connection.define(
   }
 );
 
-module.exports = UserMeta;
+module.exports = {UserMeta, UserMetaModel};

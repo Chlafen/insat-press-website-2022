@@ -1,7 +1,13 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const Category = connection.define(
+
+const Category = function(category) {
+  this.category_name = category.category_name;
+  this.category_slug = category.category_slug;
+}
+
+const CategoryModel = db.define(
   "categories",
   {
     category_id: {
@@ -21,6 +27,6 @@ const Category = connection.define(
     createdAt: false,
     updatedAt: false
   }
-); 
+);
 
-module.exports = Category;
+module.exports = {CategoryModel, Category};

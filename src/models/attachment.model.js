@@ -1,7 +1,13 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const Attachment = connection.define(
+
+const Attachment = function(attachment) {
+    this.mime_name = attachment.mime_name;
+    this.attachment_path = attachment.attachment_path;
+}
+
+const AttachmentModel = db.define(
   "attachments",
   {
     attachment_id: {
@@ -23,4 +29,4 @@ const Attachment = connection.define(
   }
 );
 
-module.exports = Attachment;
+module.exports = {Attachment, AttachmentModel};

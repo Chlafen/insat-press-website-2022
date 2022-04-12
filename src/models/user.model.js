@@ -1,13 +1,29 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const User = connection.define(
+// constructor
+const User = function(data) { 
+  this.username = data.username;
+  this.email = data.email;
+  this.password = data.password;
+  this.first_name = data.first_name;
+  this.last_name = data.last_name;
+  this.join_date = data.join_date;
+  this.profile_pic = data.profile_pic;
+}
+
+const UserModel = db.define(
   "users",
   {
     user_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+    },
+    username: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+      unique: true,
     },
     email: {
       type: DataTypes.STRING(50),
@@ -18,18 +34,22 @@ const User = connection.define(
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    username: {
+    first_name: {
       type: DataTypes.STRING(50),
       allowNull: false,
-      unique: true,
     },
-    display_name: {
+    last_name: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
     join_date: {
       type: DataTypes.DATE,
       allowNull: false,
+    },
+    is_verified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
     profile_pic: {
       type: DataTypes.STRING(255),
@@ -41,4 +61,4 @@ const User = connection.define(
   }
 );
 
-module.exports = User;
+module.exports = {User, UserModel};

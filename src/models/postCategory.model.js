@@ -1,7 +1,12 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const PostCategory = connection.define(
+
+const PostCategory = function(postCategory) {
+  this.type = postCategory.type;
+}
+
+const PostCategoryModel = db.define(
   "post_categories",
   {
     type : {
@@ -14,4 +19,4 @@ const PostCategory = connection.define(
   }
 );
 
-module.exports = PostCategory;
+module.exports = {PostCategory, PostCategoryModel};

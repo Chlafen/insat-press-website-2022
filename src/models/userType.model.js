@@ -1,7 +1,12 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const UserType = connection.define(
+
+const UserType = function(userType) {
+  this.title = userType.title;
+}
+
+const UserTypeModel = db.define(
   "user_types",
   {
     type_id: {
@@ -19,4 +24,4 @@ const UserType = connection.define(
   } 
 );
 
-module.exports = UserType;
+module.exports = {UserType, UserTypeModel};

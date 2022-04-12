@@ -1,7 +1,17 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const Logs = connection.define(
+
+const Log = function(log) {
+  this.ip = log.ip;
+  this.user_agent = log.user_agent;
+  this.created_at = log.created_at;
+  this.action = log.action;
+  this.username = log.username;
+}
+
+
+const LogModel = db.define(
   "logs",
   {
     log_id: {
@@ -17,7 +27,7 @@ const Logs = connection.define(
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    time : {
+    created_at : {
       type: DataTypes.DATE,
       allowNull: false,
     },
@@ -35,4 +45,4 @@ const Logs = connection.define(
   }
 );
 
-module.exports = Logs;
+module.exports = {LogModel, Log};

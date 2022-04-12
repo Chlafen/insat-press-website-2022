@@ -1,9 +1,18 @@
-const connection = require('../configs/sqlize.config')
-const {Sequelize, DataTypes} = require('sequelize')
-const User = require('./user.model');
-const Attachment = require('./attachment.model');
+const {DataTypes} = require('sequelize');
+const db = require('../configs/db.config');
 
-const Post = connection.define(
+
+const Post = function (post) {
+  this.post_content = post.post_content;
+  this.post_title = post.post_title;
+  this.post_edit = post.post_edit;
+  this.post_date = post.post_date;
+  this.view_count = post.view_count;
+  this.image_path = post.image_path;
+  this.type = post.type;
+}
+
+const PostModel = db.define(
   "posts", 
   {
     post_id : {
@@ -42,10 +51,11 @@ const Post = connection.define(
       allowNull: false
     }
   },{
+    db,
+    timestamps: false,
     createdAt: false,
     updatedAt: false
   }
 );
 
-
-module.exports = Post
+module.exports = {Post, PostModel};

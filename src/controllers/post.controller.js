@@ -1,47 +1,49 @@
-const post = require('../services/post.service'); 
+const { Post } = require('../models');
+const {asyncHandler, responseHandler} = require('../helpers/handlers');
+const { postService } = require('../services');
+const { DataTypes } = require('sequelize');
+const { formatDate } = require('../utils');
+const { createHash } = require('crypto');
 
-
-async function get(req, res, next) {
+exports.getSinglePost = asyncHandler(async (req, res) => {
   try {
-    if(req.query.pid)
-      res.json(await post.getPost(req.query.pid));
-    else
-      res.sendStatus(404)
-  } catch (err) {
-    console.error(`Error while getting post pid=${req.query.pid || "unspecified"}.\n`, err.message);
+    const id = req.params.id || -1;
+    await postService.retrieveOne(id,(err, data) => {
+      if(err) {
+        return res.status(err.code).json(err);
+        console.log("test");
+      }
+      return res.status(data.code).json(data);
+    });
+  }catch(error) {
+    console.log(error);
+    return res.status(error.code).json(error);
   }
-}
+});
 
-async function update(req, res, next) {
+exports.createPost = asyncHandler(async (req, res) => {
   try {
-    res.json(await post.updatePost(req.body));
-  } catch (err) {
-    console.error(`Error while updating post pid=${req.query.pid || "unspecified"}.\n`, err.message);
+    const rq = req.body;
+    const now = formatDate(new Date());
+    const image_path = 'uploads/' + now.year + '/' + now.month + '/' +  createHash('sha256',now.date) + '.jpg';
+    const post = new Post({
+      post_content: rq.post_content,
+      post_title: rq.post_title,
+      author_id: rq.author_id,
+      post_edit: DataTypes.NOW,
+      post_date: DataTypes.NOW,
+      type: rq.type,
+      view_count: 1,
+      image_path: image_path,
+    });
+    await postService.createPost(post,(err, data) => {
+      if(err) {
+        return res.status(err.code).json(err);
+      }
+      return res.status(data.code).json(data);
+    });
+  }catch(error) {
+    console.log(error);
+    return res.status(error.code).json(error);
   }
-}
-
-async function create(req, res, next) {
-  try {
-    res.json(await post.createPost(req.body));
-  } catch (err) {
-    console.error(`Error while creating post.\n`, err.message);
-  }
-}
-
-async function deletePost(req, res, next) {
-  try {
-    if(req.query.pid)
-      res.json(await post.getPost(req.query.pid));
-    else
-      res.sendStatus(404)
-  } catch (err) {
-    console.error(`Error while deleting post pid=${req.query.pid || "unspecified"}.\n`, err.message);
-  }
-}
-
-module.exports = {
-  get,
-  update,
-  create,
-  deletePost
-};
+});
