@@ -17,7 +17,7 @@ const PostTagModel = db.define(
       autoIncrement: true
     },
     tag_name: {
-      type: DataTypes.STRING(50),
+      type: DataTypes.STRING(150),
       allowNull: false
     }
   }, {
