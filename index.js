@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
 const index = require('./src/routes/index');
 
+require('./src/utils/dataImport/importDB');
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

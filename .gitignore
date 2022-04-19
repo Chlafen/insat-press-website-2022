@@ -107,3 +107,6 @@ dist
 
 upload/
 tmp/
+
+# Database
+src/utils/dataImport/oldDB/*.json

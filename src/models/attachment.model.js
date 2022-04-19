@@ -15,7 +15,7 @@ const AttachmentModel = db.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    mime_name: {
+    mime_type: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
