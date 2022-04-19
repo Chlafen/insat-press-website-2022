@@ -14,10 +14,20 @@ app.use(fileUpload({createParentPath: true}));
 
 //static paths
 app.use(express.static(path.join(__dirname, "client", "build")));
-app.use(express.static(path.join(__dirname, "upload", "image")));
+app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "tmp")));
 
 app.use('/api', index);
+
+app.get("/uploads/*", (req, res) => {
+  //check file existence
+  res.sendFile(path.join(__dirname, req.path));
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server listening on port:${PORT}`);

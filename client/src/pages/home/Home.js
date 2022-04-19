@@ -52,10 +52,6 @@ const Home = () => {
       <Category isLink={true} category={categories[3]}/>
       <SectionPosts postData={categPosts}/>
       <div className='invisible-v-spacer'></div>
-
-      <div id="fb-root"></div>
-      <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0" nonce="bTsJERE5"></script>
-      <div className="fb-comments" data-href="http://localhost:3000/" data-width="" data-numposts="4"></div>
     </div>
   );
 }

@@ -20,7 +20,7 @@ const EmailActivationModel = db.define(
       allowNull: false,
     },
     expiration_date: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
       allowNull: false,
     }

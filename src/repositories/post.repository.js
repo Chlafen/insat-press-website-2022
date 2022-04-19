@@ -153,8 +153,8 @@ exports.retrieveOne = async (postId, result) => {
 
   if(queryResult == null) {
     result(responseHandler(false, 404, 'There isn\'t any post by this id', null), null);
-  }
-  queryResult = queryResult.toJSON();
+  }else
+    queryResult = queryResult.toJSON();
 
   return result(null, responseHandler(true, 200, 'Success', queryResult));
 }
