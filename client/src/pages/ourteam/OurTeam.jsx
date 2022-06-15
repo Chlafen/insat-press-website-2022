@@ -15,7 +15,7 @@ const User = {
 
 
 export default function OurTeam() {
-  const [ , setAuthors] = useState([]);
+  const [ authors, setAuthors] = useState([]);
   const [photographers, setPhotographers] = useState([]);
   const [webmasters, setWebmasters] = useState([]); 
   

@@ -57,7 +57,7 @@ exports.register = async (user, result) => {
       join_date: user.join_date,
       profile_pic: user.profile_pic,
       is_verified: false,
-      type_id: 1
+      type_id: 4
     }, { transaction: trsct });
     
     //email verif

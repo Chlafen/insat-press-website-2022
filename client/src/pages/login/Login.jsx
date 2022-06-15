@@ -29,7 +29,7 @@ export default function Login() {
       .then(resp => {
         console.log("hi");
         auth.login({accessToken: resp.data.data.accessToken});
-        //window.location.href = '/';
+        window.location.href = '/';
       })
       .catch(errResp => {
         console.log(errResp.response);

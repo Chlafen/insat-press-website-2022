@@ -28,7 +28,7 @@ export default function AdminPanel() {
   }, []);
 
   return (
-    <>
+    <div>
       This is admin panel<br/>
       This is admin panel<br/>
       This is admin panel<br/>
@@ -36,6 +36,6 @@ export default function AdminPanel() {
       This is admin panel<br/>
       This is admin panel<br/>
       This is admin panel<br/>
-    </>
+    </div>
   );
 }

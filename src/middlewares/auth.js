@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const isUserAuthed = (req, res, next)=>{
     const token = req.headers["x-access-token"];
+    console.log("------tokennn" + token);
     if(!token){
         // TODO: Not authed
         return res.status(401).json({error: "You need to signin!"});
@@ -12,7 +13,7 @@ const isUserAuthed = (req, res, next)=>{
             // TODO: Invalid token
             return res.status(403).json({error: "Invalid access token!"});
         }
-
+        console.log("----------------logging user" + user);
         req.user = user;
         next();
     });

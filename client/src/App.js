@@ -1,6 +1,5 @@
 import './App.css';
-import React, { useContext, useState } from "react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Header from './components/header/Header';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from './pages/home/Home';
@@ -30,14 +29,14 @@ function App() {
   const [headerTransparent, setHeaderTransparent] = useState(window.location.pathname === '/');
   const [headerVisible, setHeaderVisible] = useState(true);
   const auth = useContext(AuthContext);
-    const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-    useEffect(() => {
-      getCategories().then(res => {
-        const cats = res.data; 
-        setCategories(cats);
-      });
-    }, [])
+  useEffect(() => {
+    getCategories().then(res => {
+      const cats = res.data; 
+      setCategories(cats);
+    });
+  }, [])
 
   return (
     <AuthContainer>
@@ -78,11 +77,6 @@ function App() {
                   <p>contact  </p>
                 )}}>
             </Route>
-            <Route exact path={'/category/' + c.category_slug}
-              render={()=>{
-                setHeaderTransparent(window.location.pathname === '/');
-                return (<Category category={c}/>)}}>
-            </Route>
             <Route exact path="/post"
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
@@ -95,22 +89,21 @@ function App() {
               setHeaderVisible(true);
               return (<EditorPage/>)}}>
             </Route>
-            <Route exact path="/login"
+            <Route exact path="/about"
                 render={()=>{
                   setHeaderTransparent(window.location.pathname === '/');
                 setHeaderVisible(true);
                 return (<p>about</p>)}}>
               </Route>
               {
-                categories.map((c) => {
+                categories.map((c, i) => {
                   return (
-                    <Route exact path={'/category/' + c.toLowerCase().replace(/\s+/g, '')}
+                    <Route key={i} exact path={'/category/' + c.category_slug}
                       render={()=>{
                         setHeaderTransparent(window.location.pathname === '/');
-                        return (<p>{c}</p>)}}>
+                        return (<Category category={c}/>)}}>
                     </Route>
-                  )
-                })
+                  )})
               }
               <Route exact path="/post"
                 render={()=>{
