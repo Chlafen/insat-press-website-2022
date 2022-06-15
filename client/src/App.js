@@ -42,7 +42,7 @@ function App() {
     <AuthContainer>
       <Router>
         <div className="App">
-          {headerVisible?<Header displayTop="true" hasBackground = {!headerTransparent}/>:<></>}
+          {headerVisible?<><Header displayTop="true" hasBackground = {!headerTransparent}/>  <div className="margin-header"></div></>:<></>}
           <div className="content">
             <Switch>
             <Route exact path="/"

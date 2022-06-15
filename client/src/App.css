@@ -8,7 +8,12 @@
 
 .content > *{
   flex-grow: 1;
+  margin-top: 0 !important;
+}
+
+.margin-header{
   margin-top: clamp(12rem, 4.2500rem + 10.0000vw, 14.25rem) !important;
+  ;
 }
 
 @media screen and (max-width:800px) {
