@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
-import axios from 'axios';
+import React, {useContext, useEffect, useState} from 'react'
 import './index.css'
 import { MdLogin, MdLock, MdArrowRight, MdMail } from 'react-icons/md';
 import { AiFillTag } from 'react-icons/ai';
 import {RiErrorWarningFill} from 'react-icons/ri';
 import { Link } from 'react-router-dom'
-import {validateEmail} from '../../util/utilities'
+import { validateEmail } from '../../util/utilities'
+import { apiPost } from '../../util/apiUtilities'
+import { AuthContext } from '../../context/authContext';
  
 export default function Signup() {
   const [user,setUser] = useState({
@@ -17,6 +18,15 @@ export default function Signup() {
     rpassword: ""
   });
   const [error,setError] = useState([]);
+  const auth = useContext(AuthContext);
+
+  useEffect(()=>{
+    if(auth.currentUser()){
+      // TODO: Log event: Already logged in.
+      window.location.href = '/';
+      return;
+    }
+  }, [])
 
   const register = async (e) => {
     e.preventDefault(); 
@@ -35,18 +45,12 @@ export default function Signup() {
       }
       if(newErr.length == 0){
         console.log("Registering user...");
-        await fetch('/api/users/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(user) 
-        })
-          .then( res => res.json())
+        await apiPost(
+          '/api/users/register', 
+          user
+        )
           .then( res => {
-            res = JSON.stringify(res);  
-            res = JSON.parse(res);
-            if(res.code === 200){
+            if(res.status === 200){
               alert("Successfully registered!");
               window.location.href = "/login";
             }else{

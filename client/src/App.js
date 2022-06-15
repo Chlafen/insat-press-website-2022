@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Header from './components/header/Header';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from './pages/home/Home';
@@ -11,6 +11,8 @@ import EditorPage from './pages/editor/Editor';
 import OurTeam from './pages/ourteam/OurTeam';
 import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
+import { AuthContainer, AuthContext } from './context/authContext';
+import AdminPanel from './pages/admin';
 
 const categories = [ // from server
   "Uni life",
@@ -25,87 +27,104 @@ const categories = [ // from server
 function App() {
   const [headerTransparent, setHeaderTransparent] = useState(window.location.pathname === '/');
   const [headerVisible, setHeaderVisible] = useState(true);
+  const auth = useContext(AuthContext);
+
   return (
-    <Router>
-      <div className="App">
-        {headerVisible?<Header displayTop="true" hasBackground = {!headerTransparent}/>:<></>}
-        <div className="content">
-          <Switch>
+    <AuthContainer>
+      <Router>
+        <div className="App">
+          {headerVisible?<Header displayTop="true" hasBackground = {!headerTransparent}/>:<></>}
+          <div className="content">
+            <Switch>
             <Route exact path="/"
-            render={()=>{
-              setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (<Home/>)}}>
-            </Route>
-            <Route exact path="/ourteam"
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (<OurTeam/>)}}>
-            </Route>
-            <Route exact path="/gallery"
+                setHeaderVisible(true);
+                return (<Home/>)}}>
+              </Route>
+              <Route exact path="/admin"
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (<p>gallery  </p>)}}>
-            </Route>
-            <Route exact path="/contact"
-              render={()=>{
-                setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (
-                  <p>contact</p>)}}>
-            </Route>
-            <Route exact path="/about"
-              render={()=>{
-                setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (<p>about</p>)}}>
-            </Route>
-            {
-              categories.map((c) => {
+                setHeaderVisible(true);
+                return (<AdminPanel/>)}}>
+              </Route>
+              <Route exact path="/ourteam"
+                render={()=>{
+                  setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(true);
+                return (<OurTeam/>)}}>
+              </Route>
+              <Route exact path="/gallery"
+                render={()=>{
+                  setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(true);
+                return (<p>gallery  </p>)}}>
+              </Route>
+              <Route exact path="/contact"
+                render={()=>{
+                  setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(true);
                 return (
-                  <Route exact path={'/category/' + c.toLowerCase().replace(/\s+/g, '')}
-                    render={()=>{
-                      setHeaderTransparent(window.location.pathname === '/');
-                      return (<p>{c}</p>)}}>
-                  </Route>
-                )
-              })
-            }
-            <Route exact path="/post"
+                    <p>contact</p>)}}>
+              </Route>
+              <Route exact path="/about"
+                render={()=>{
+                  setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(true);
+                return (<p>about</p>)}}>
+              </Route>
+              {
+                categories.map((c) => {
+                  return (
+                    <Route exact path={'/category/' + c.toLowerCase().replace(/\s+/g, '')}
+                      render={()=>{
+                        setHeaderTransparent(window.location.pathname === '/');
+                        return (<p>{c}</p>)}}>
+                    </Route>
+                  )
+                })
+              }
+              <Route exact path="/post"
+                render={()=>{
+                  setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(true);
+                return (<Article/>)}}>
+              </Route>
+              <Route exact path="/editor"
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (<Article/>)}}>
-            </Route>
-            <Route exact path="/editor"
-            render={()=>{
-              setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (<EditorPage/>)}}>
-            </Route>
-            <Route exact path="/login"
+                setHeaderVisible(true);
+                return (<EditorPage/>)}}>
+              </Route>
+              <Route exact path="/login"
+                  render={()=>{
+                    setHeaderVisible(false);
+                    return (<Login/>)}}>
+              </Route>
+              <Route exact path="/signup"
+                  render={()=>{
+                    setHeaderVisible(false);
+                    return (<Signup/>)}}>
+              </Route>
+              <Route exact path="/logout"
+                  render={()=>{
+                    auth.logout();
+                    window.location.href = '/';
+                    setHeaderVisible(false);
+                    }}>
+              </Route>
+              <Route path="*"
                 render={()=>{
-                  setHeaderVisible(false);
-                  return (<Login/>)}}>
-            </Route>
-            <Route exact path="/signup"
-                render={()=>{
-                  setHeaderVisible(false);
-                  return (<Signup/>)}}>
-            </Route>
-            <Route path="*"
-              render={()=>{
-                setHeaderTransparent(window.location.pathname === '/');
-              setHeaderVisible(true);
-              return (<Error404/>)}}>
-            </Route>
-          </Switch>
+                  setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(true);
+                return (<Error404/>)}}>
+              </Route>
+            </Switch>
+          </div>
+          {headerVisible?<Footer/>:<></>}
         </div>
-        {headerVisible?<Footer/>:<></>}
-      </div>
-    </Router>
+      </Router>
+    </AuthContainer>
   );
 }
 

@@ -1,34 +1,40 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './index.css'
 import { MdLogin, MdLock, MdArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../context/authContext';
+import { apiPost } from '../../util/apiUtilities';
 
 export default function Login() {
   const [login, setLogin] = useState({});
   const [error , setError] = useState('');
 
+  const auth = useContext(AuthContext);
+
+  useEffect(()=>{
+    if(auth.currentUser()){
+      // TODO: Log event: Already logged in.
+      window.location.href = '/';
+      return;
+    }
+  }, [])
+
   const submitLogin = async (e) => {
     e.preventDefault(); 
+    console.log("hhh")
     if(login.username === '' || login.password === ''){
       setError('Please fill all the fields');
     }else{
-      await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(login)
+      await apiPost('/api/auth/login', login)
+      .then(resp => {
+        console.log("hi");
+        auth.login({accessToken: resp.data.data.accessToken});
+        //window.location.href = '/';
       })
-      .then(res => res.json())
-      .then(data => {
-        if(data.error){
-          setError(data.error);
-        }else{
-          localStorage.setItem('token', data.token);
-          window.location.href = '/';
-        }
-      })
-      .catch(err => console.log(err));
+      .catch(errResp => {
+        console.log(errResp.response);
+        setError(errResp.response.data.message);
+      });
     }
   }
 
