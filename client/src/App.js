@@ -42,8 +42,8 @@ function App() {
     <AuthContainer>
       <Router>
         <div className="App">
-          {headerVisible?<><Header displayTop="true" hasBackground = {!headerTransparent}/>  <div className="margin-header"></div></>:<></>}
-          <div className="content">
+          {headerVisible?<Header displayTop="true" hasBackground = {!headerTransparent}/>:<></>}
+          <div className={"content " + (headerVisible ? "margin-header" : "")}>
             <Switch>
             <Route exact path="/"
               render={()=>{
@@ -54,7 +54,7 @@ function App() {
               <Route exact path="/admin"
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
-                setHeaderVisible(true);
+                setHeaderVisible(false);
                 return (<AdminPanel/>)}}>
               </Route>
               <Route exact path="/ourteam"
