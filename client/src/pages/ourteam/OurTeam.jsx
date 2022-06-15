@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './index.css'
 import SectionTitle from '../../components/section-title/SectionTitle';
 import Card from './card/Card';
-import axios from 'axios';
+import { apiGet } from '../../util/apiUtilities';
 
 const User = {
   user_id : 1,
@@ -21,13 +21,13 @@ export default function OurTeam() {
   
   //get list of team from server
   useEffect(() => {
-     axios.get('/api/users/team/authors?limit=10')
+     apiGet('/api/users/team/authors?limit=10')
       .then(res => {authors.push(...res.data.data)})
       .catch(err => console.log(err));
-     axios.get('/api/users/team/photographers?limit=10')
+      apiGet('/api/users/team/photographers?limit=10')
       .then(res => {photographers.push(...res.data.data)})
       .catch(err => console.log(err));
-     axios.get('/api/users/team/webmasters?limit=10')
+      apiGet('/api/users/team/webmasters?limit=10')
       .then(res => {webmasters.push(...res.data.data)})
       .catch(err => console.log(err));
   }, []);

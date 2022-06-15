@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import SectionTitle from '../../components/section-title/SectionTitle'
 import SectionPosts from '../../components/section-posts/SectionPosts'
 import './index.css'
-import axios from 'axios'
 import InfiniteScroll from 'react-infinite-scroller'
 import format  from '../../util/format'
+import { apiGet } from '../../util/apiUtilities'
 
 
 const postData = {
@@ -27,7 +27,7 @@ export default function Category(props) {
   const [hasMore, setHasMore] = useState(true);
 
   // useEffect(() => {
-  //   axios.get(`/api/posts/category/${props.category.category_slug}?page=1&limit=3`)
+  //   apiGet(`/api/posts/category/${props.category.category_slug}?page=1&limit=3`)
   //     .then(res => {
   //       if(res.data.data.length === 0) {
   //         setHasMore(false)
@@ -42,7 +42,7 @@ export default function Category(props) {
   // }, [])
 
   const loadFunc = async () => {
-    await axios.get(`/api/posts/category/${props.category.category_slug}?page=${posts[0] + 1}&limit=3`)
+    await apiGet(`/api/posts/category/${props.category.category_slug}?page=${posts[0] + 1}&limit=3`)
       .then(res => {
         if(res.data.data.length === 0) {
           setHasMore(false);
