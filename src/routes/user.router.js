@@ -18,12 +18,16 @@ router.route('/userinfo')
   .post(
     check('username', 'Please include a valid username').isLength({ min: 5 }),
     check('password', 'Please enter a password with 5 or more characters').isLength({ min: 7 }),
+    authMiddleware,
     checkExistence,
     userController.register
     );
     
 router.route('/:id')
-  .get(userController.getOneUser);
+  .get(
+    authMiddleware, 
+    userController.getOneUser
+  );
 // router.route('/authors')
 //   .get(userController.getAuthors);
 
