@@ -4,10 +4,7 @@ import { Link } from 'react-router-dom';
 import { FaAngleDown, } from "react-icons/fa"
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 import { AuthContext } from '../../../context/authContext';
-import { getUserInfo } from '../../../util/apiUtilities';
-import axios from 'axios';
-
- 
+import { apiGet, getUserInfo } from '../../../util/apiUtilities'; 
 
 export default function NavBar() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -32,7 +29,7 @@ export default function NavBar() {
   const [width, setWidth] = useState(window.innerWidth);
 
   const getCategories = async () => {
-    const res = await axios.get('/api/categories');
+    const res = await apiGet('/api/categories');
     return new Promise((resolve) => {
       resolve(
         res.data

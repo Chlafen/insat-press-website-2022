@@ -13,11 +13,11 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import { AuthContainer, AuthContext } from './context/authContext';
 import AdminPanel from './pages/admin';
-import axios from 'axios';
 import Category from './pages/category/Category';
+import { apiGet } from './util/apiUtilities';
 
 const getCategories = async () => {
-  const res = await axios.get('/api/categories');
+  const res = await apiGet('/api/categories');
   return new Promise((resolve) => {
     resolve(
       res.data

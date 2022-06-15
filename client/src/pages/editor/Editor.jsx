@@ -15,10 +15,10 @@ import {MdAccessAlarm, MdInsertComment} from 'react-icons/md';
 import {AiFillEye} from "react-icons/ai"
 import {FacebookIcon,LinkedinIcon,RedditIcon,TwitterIcon} from "react-share";
 
-import axios from 'axios'
 import Category from '../../components/category/Category';
 import EditorSide from './editorSide/EditorSide';
 import { Redirect, useHistory } from 'react-router-dom';
+import { apiPost } from '../../util/apiUtilities';
 
 const iconSize = 32
 
@@ -272,7 +272,7 @@ export default function EditorPage(props) {
 async function uploadCallback(file)  {
   const formData = new FormData();
   formData.append('contentImg', file, file.name);
-  const uploadedImageUrl = await axios.post("tmp", formData);
+  const uploadedImageUrl = await apiPost("tmp", formData);
   
   return new Promise((resolve) => {
     resolve({

@@ -11,10 +11,10 @@ import {
 import Category from '../../components/category/Category';
 import SectionPosts from '../../components/section-posts/SectionPosts';
 import Testpostframe from '../../components/post-frames/test-post-frame/TestPostFrame';
-import axios from 'axios';
 import { Redirect } from "react-router-dom";
 import {formatPost} from './fomratPost';
 import { useQuery } from '../../util/utilities';
+import { apiGet } from '../../util/apiUtilities';
 
 
 const iconSize = 30;
@@ -34,7 +34,6 @@ const postData2 = {
   url: '/'
 }
 
-
 export default function Article() {
   const [postData1, setPostData1] = useState({});
   const [redirect, setRedirect] = useState(false);
@@ -43,7 +42,7 @@ export default function Article() {
   
   useEffect(() => {
     async function getPostData(pid){
-      const postData = await axios.get('/api/posts/'+post_id, {params:{pid:pid}}); 
+      const postData = await apiGet('/api/posts/'+post_id, {params:{pid:pid}}); 
       return new Promise((resolve) => {
         resolve(
           postData.data
