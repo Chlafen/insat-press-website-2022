@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './index.css'
 import SectionTitle from '../../components/section-title/SectionTitle';
 import Card from './card/Card';
-
+import axios from 'axios';
 
 const User = {
   user_id : 1,
@@ -15,18 +15,22 @@ const User = {
 
 
 export default function OurTeam() {
+  const [ , setAuthors] = useState([]);
+  const [photographers, setPhotographers] = useState([]);
+  const [webmasters, setWebmasters] = useState([]); 
+  
   //get list of team from server
-  const authors = [];
-  const photographers = [];
-  const webmasters = [];
-  webmasters.push(User);
-  webmasters.push(User);
-    //get list of team from server
-  for (let i = 0; i < 10; i++) {
-    User.user_id++;
-    authors.push(User);
-    photographers.push(User);
-  }
+  useEffect(() => {
+     axios.get('/api/users/team/authors?limit=10')
+      .then(res => {authors.push(...res.data.data)})
+      .catch(err => console.log(err));
+     axios.get('/api/users/team/photographers?limit=10')
+      .then(res => {photographers.push(...res.data.data)})
+      .catch(err => console.log(err));
+     axios.get('/api/users/team/webmasters?limit=10')
+      .then(res => {webmasters.push(...res.data.data)})
+      .catch(err => console.log(err));
+  }, []);
 
 
   return (

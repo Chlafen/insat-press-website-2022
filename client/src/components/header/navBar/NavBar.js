@@ -1,22 +1,13 @@
 import React, {useState, useEffect, useContext} from 'react';
 import './index.css';
-import NavButton from './navButton/NavButton';
 import { Link } from 'react-router-dom';
-import { FaAngleRight, FaAngleDown, } from "react-icons/fa"
+import { FaAngleDown, } from "react-icons/fa"
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 import { AuthContext } from '../../../context/authContext';
 import { getUserInfo } from '../../../util/apiUtilities';
+import axios from 'axios';
 
-
-const categories = [
-  "Uni life",
-  "Science",
-  "Sports",
-  "Stories",
-  "Events",
-  "Culture",
-  "Society"
-];
+ 
 
 export default function NavBar() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -37,6 +28,24 @@ export default function NavBar() {
       setUserInfo(info);
     })
   }, []);
+  const [categories, setCategories] = useState([]);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const getCategories = async () => {
+    const res = await axios.get('/api/categories');
+    return new Promise((resolve) => {
+      resolve(
+        res.data
+      );
+    });
+  };
+
+  useEffect(() => {
+    getCategories().then(res => {
+      const cats = res.data
+      setCategories(cats);
+    });
+  }, [])
 
   useEffect(() => {
       const navBar = document.querySelector('.nav-icons');
@@ -49,21 +58,30 @@ export default function NavBar() {
       return () => navBar.removeEventListener('click', handleClick);
   })
 
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const closeNavList = (e) => {
+    setToggleMenu(false);
+  }
   return (
     <div className={`nav-bar ${toggleMenu ? " open-menu" : " close-menu"}`}>
       <div className="nav-logo">
-        <img src={process.env.PUBLIC_URL + "images/logo.png"}/>
+        <img src={process.env.PUBLIC_URL + "logo.png"}/>
       </div>
       <div className="nav-icons">
         <RiMenuLine className="open-menu-icon"/>
         <RiCloseLine className="close-menu-icon"/> 
       </div>
       <ul className="nav-list">
-        <Link className="link-nav" to='/'><li>Home</li></Link>
+        <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/'><li>Home</li></Link>
       
-        <Link className="link-nav" to='/ourteam'><li>Our team</li></Link>
+        <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/ourteam'><li>Our team</li></Link>
 
-        <Link className="link-nav" to='/gallery'><li>Gallery</li></Link>
+        <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/gallery'><li>Gallery</li></Link>
         <div className="link-nav">
           <li className='dropdown-menu'>
             <div style={{display:'flex','alignItems': 'center'}}>Categories &nbsp;
@@ -71,17 +89,20 @@ export default function NavBar() {
             </div>
             <ul className="sub-menu">
               {
-                categories.map((c) => {
+                categories.map((c, i) => {
+                  if(i<10 && width > 800) {
+                    return
+                  }
                   return (
-                    <Link className="link-nav" to={'/category/'+c.toLowerCase().replace(/\s+/g, '')}><li>{c}</li></Link> 
+                    <a className="link-nav" key={i} onClick={(e)=>closeNavList(e)} href={'/category/'+c.category_slug}><li>{c.category_name}</li></a> 
                 )})
               }
 
             </ul>
           </li>
         </div>
-        <Link className="link-nav" to='/contact'><li>Contact</li></Link>
-        <Link className="link-nav" to='/about'><li>About us</li></Link>
+        <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/contact'><li>Contact</li></Link>
+        <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/about'><li>About us</li></Link>
         {/*profile*/}
         {/* <li>
 

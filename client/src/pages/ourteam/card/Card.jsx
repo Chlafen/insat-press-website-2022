@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { AiFillBook, AiFillEye } from 'react-icons/ai';
-import { MdComment, MdTextFields } from 'react-icons/md';
+import { MdTextFields } from 'react-icons/md';
 import './index.css'
 
 export default function Card(props) {

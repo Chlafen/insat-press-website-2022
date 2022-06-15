@@ -10,7 +10,7 @@ export default function SectionPosts(props) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   const sectionData = props.postData; //list
-
+  
   useEffect(() => {
     function handleResize() {
       setScreenWidth(window.innerWidth);
@@ -26,12 +26,12 @@ export default function SectionPosts(props) {
       {
         screenWidth < widthToChangeToSquarePosts ?
         <>
-          <SquarePostFrame postData={sectionData[1]}/>
-          <SquarePostFrame postData={sectionData[2]}/>
+          {sectionData[1]?  <SquarePostFrame postData={sectionData[1]}/> : <div style={{width:'100%'}}></div>}
+          {sectionData[2]?  <SquarePostFrame postData={sectionData[2]}/> : <div style={{width:'100%'}}></div>}
         </> :
         <>
-          <WidePostFrame postData={sectionData[1]}/>
-          <WidePostFrame postData={sectionData[2]}/>
+          {sectionData[1]? <WidePostFrame postData={sectionData[1]}/> : <div style={{width:'100%'}}></div>}
+          {sectionData[2]? <WidePostFrame postData={sectionData[2]}/> : <div style={{width:'100%'}}></div>}
         </>
       }
     </div>

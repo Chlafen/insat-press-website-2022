@@ -10,6 +10,8 @@
 
 .wide-post-img {
   overflow: hidden;
+  aspect-ratio: calc(16 / 9);
+  background-color: #696969;
 }
 
 .wide-post-img > img{

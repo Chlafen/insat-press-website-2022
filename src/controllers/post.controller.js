@@ -52,3 +52,21 @@ exports.createPost = asyncHandler(async (req, res) => {
     return res.status(error.code).json(error);
   }
 });
+
+exports.getPostsByCategory = asyncHandler(async (req, res) => {
+  try{
+    const slug = req.params.slug;
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 9;
+    const offset = (page - 1) * limit;
+    await postService.getPostsByCategory(slug, limit, offset, (err, data) => {
+      if(err) {
+        return res.status(err.code).json(err);
+      }
+      return res.status(data.code).json(data);
+    });
+  }catch(error) {
+    console.log(error);
+    return res.status(error.code).json(error);
+  }
+});

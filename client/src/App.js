@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from './components/header/Header';
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from './pages/home/Home';
@@ -13,21 +14,30 @@ import Login from './pages/login/Login';
 import Signup from './pages/signup/Signup';
 import { AuthContainer, AuthContext } from './context/authContext';
 import AdminPanel from './pages/admin';
+import axios from 'axios';
+import Category from './pages/category/Category';
 
-const categories = [ // from server
-  "Uni life",
-  "Science",
-  "Sports",
-  "Stories",
-  "Events",
-  "Culture",
-  "Society"
-];
+const getCategories = async () => {
+  const res = await axios.get('/api/categories');
+  return new Promise((resolve) => {
+    resolve(
+      res.data
+    );
+  });
+};
 
 function App() {
   const [headerTransparent, setHeaderTransparent] = useState(window.location.pathname === '/');
   const [headerVisible, setHeaderVisible] = useState(true);
   const auth = useContext(AuthContext);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+      getCategories().then(res => {
+        const cats = res.data; 
+        setCategories(cats);
+      });
+    }, [])
 
   return (
     <AuthContainer>
@@ -65,9 +75,27 @@ function App() {
                   setHeaderTransparent(window.location.pathname === '/');
                 setHeaderVisible(true);
                 return (
-                    <p>contact</p>)}}>
-              </Route>
-              <Route exact path="/about"
+                  <p>contact  </p>
+                )}}>
+            </Route>
+            <Route exact path={'/category/' + c.category_slug}
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+                return (<Category category={c}/>)}}>
+            </Route>
+            <Route exact path="/post"
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+              setHeaderVisible(true);
+              return (<Article/>)}}>
+            </Route>
+            <Route exact path="/editor"
+            render={()=>{
+              setHeaderTransparent(window.location.pathname === '/');
+              setHeaderVisible(true);
+              return (<EditorPage/>)}}>
+            </Route>
+            <Route exact path="/login"
                 render={()=>{
                   setHeaderTransparent(window.location.pathname === '/');
                 setHeaderVisible(true);

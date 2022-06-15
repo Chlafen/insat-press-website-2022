@@ -35,7 +35,7 @@ export function DDMMYYYY(date) {
   let dd = date.getDate()
   if (dd < 10) dd = '0' + dd
   if (mm < 10) mm = '0' + mm
-  date = dd + '/' + mm + '/' + yyyy
+  date = mm + '/' + dd + '/' + yyyy
   return date;
 }
 

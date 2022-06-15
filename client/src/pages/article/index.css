@@ -51,8 +51,13 @@
   height: max-content;
 }
 
-.p-author-img >img{
-  aspect-ratio: 1;
+.p-author-img {
+  border-radius: 50%;
+}
+
+.p-author-img > *{
+  background-color: #5e5b5b;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   width: clamp(2.6rem, 1.9318rem + 1.6364vw, 4rem);
   object-fit: cover;

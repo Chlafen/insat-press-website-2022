@@ -1,0 +1,29 @@
+
+.category-page > .section-title{
+  margin-bottom: calc(.6rem + 1vw);
+}
+.loader{
+  font-weight: 800;
+  font-family: Karla, sans-serif;
+}
+
+.sep-cat{
+  height: 1px;
+  background-color: rgb(131, 131, 131);
+  margin:  1rem 120px;
+}
+
+@media screen and (max-width: 1240px) {
+  .sep-cat{
+    margin:  1rem;
+  }
+}
+.category-page   .section-posts{
+  margin-bottom: calc(.6rem + 1vw);
+}
+
+@media screen and (max-width: 700px) {
+  .sep-cat{
+    display: none;
+  }
+} 

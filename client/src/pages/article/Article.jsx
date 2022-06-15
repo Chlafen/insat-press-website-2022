@@ -88,7 +88,10 @@ export default function Article() {
         <div className="p-title">{postData1.title}</div>
         <div className="p-author-info">
           <div className="p-author-img">
-            <img src={postData1.profile_pic} alt="" />
+            { postData1.profile_pic ?
+              <img src={"http://localhost:3001"+postData1.profile_pic} alt="author-img"/> :
+              <div></div>
+            }
           </div>
           <div className="p-author-desc">
             <p>Written by</p>
@@ -96,10 +99,14 @@ export default function Article() {
           </div>
         </div>
       </div>
-      <div className="p-horizontal-sep"></div>
-      <div className="p-image">
-        <img src={postData1.image_path} alt="" />
-      </div>
+      {postData1.image_path?<>
+        <div className="p-horizontal-sep"></div>
+        <div className="p-image">
+          <img src={postData1.image_path} alt="" />
+        </div>  
+        </>
+        :null
+      }
       <div className="p-views-comms">
         <AiFillEye/>
         {postData1.view_count || ''}
@@ -157,13 +164,13 @@ export default function Article() {
         <div className="p-horizontal-sep" style={{height:'2px'}}></div>
         {/* <div id="fb-root"></div>
         <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1045606652975082&autoLogAppEvents=1" nonce="aYijSYxU"></script> */}
-        <div class="fb-comments" data-href={"http://localhost:3000/post?pid="+post_id} data-width="" data-numposts="5"></div>
+        <div className="fb-comments" data-href={"http://localhost:3000/post?pid="+post_id} data-width="" data-numposts="5"></div>
       </div>
       <div className="post-seemore">
         <Category category="SIMILAR TO THIS" isLink={false} />
       </div>
 
-      <SectionPosts postData={[postData2, postData2, postData2]}/>
+      <SectionPosts postData={[postData1, postData1, postData1]}/>
     </div>
   )
 }

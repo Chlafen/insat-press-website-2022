@@ -29,7 +29,7 @@
   color: white;
   font-size:clamp(1.5rem, 0.8rem + 1vw,2rem);
   top: 50%;
-  right: 0;
+  left: 0;
   transform: translateY(-50%) ;
   cursor: pointer;
   z-index: 1500;
@@ -57,7 +57,7 @@ nav{
 }
 
 .nav-list> .link-nav > li{
-  padding: clamp(8px, 2vw, 19.5px) ;
+  padding: clamp(15px, 2vw, 19.5px) ;
   position:relative;
   transition: background-color 0.15s ease-in;
 }
@@ -126,6 +126,7 @@ nav{
   position: absolute;
   left: 0;
   right: 0;
+  gap: 1rem;
   background-color: rgba(0, 0, 0, 0.25);
   z-index: 100;
   top: 150%;
@@ -145,12 +146,22 @@ nav{
 
 
 @media screen and (max-width: 800px) {
+  .header{
+    padding: 0;
+  }
   .nav-list li{
     margin-left: .4rem;
   }
   .nav-logo{
     height: 4rem;
   
+  }
+  .nav-list {
+    padding: 3rem 1rem;
+    padding-left: 2rem;
+  }
+  .sub-menu {
+    margin-top: 0.65rem;
   }
   .close-menu{
     display:flex;
@@ -178,7 +189,7 @@ nav{
     height:4rem
   }
   .close-menu>.nav-list{
-    display: none;
+    left: -50%; 
   }
   
   .open-menu > .nav-logo> img {
@@ -222,12 +233,13 @@ nav{
     left:0;
     top:0;
     height:100vh;
-    width:40vw;
+    width:max-content;
     flex-direction: column;
     background-color:rgb(27, 27, 27);
     align-items: initial;
     z-index: 1000;
     overflow:scroll;
+    transition: left 0.4s ease;
   }
   .nav-list >li{
     margin: 0 clamp(0.5rem,1vw,1rem);
@@ -285,7 +297,7 @@ nav{
   .nav-bar{
     width:100vw;
   }
-  .nav-list{
-    width: 80vw;
+  .close-menu>.nav-list{
+    left: -80%; 
   }
 }

@@ -158,3 +158,38 @@ exports.retrieveOne = async (postId, result) => {
 
   return result(null, responseHandler(true, 200, 'Success', queryResult));
 }
+
+exports.getPostsByCategory = async (slug, limit, offset, result) => {
+  console.log(slug, limit, offset, '----------------------------------------------------------------');
+  let queryResult = await PostModel.findAll({
+    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count'],
+    distinct: true, 
+    limit: limit, 
+    offset: offset,
+    order: [['post_date', 'DESC']],
+    where: {
+      type: 'public'
+    },
+    include: [
+      {
+        model: UserModel,
+        attributes: ['first_name', 'last_name'],
+      },
+      {
+        model: CategoryModel,
+        attributes: ['category_name'],
+        where: {
+          category_slug: slug
+        }
+      },
+    ]
+  }).catch(err => {
+    console.log(err);
+    result(responseHandler(false, 500, 'Something went wrong!', null), null);
+  });
+
+  if(queryResult == null) 
+    result(responseHandler(false, 404, 'There isn\'t any post by this category', null), null);
+  else
+    return result(null, responseHandler(true, 200, 'Success', queryResult));
+}
