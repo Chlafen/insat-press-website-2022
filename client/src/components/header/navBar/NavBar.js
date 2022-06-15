@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import './index.css';
 import NavButton from './navButton/NavButton';
 import { Link } from 'react-router-dom';
 import { FaAngleRight, FaAngleDown, } from "react-icons/fa"
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
+import { AuthContext } from '../../../context/authContext';
+import { getUserInfo } from '../../../util/apiUtilities';
 
 
 const categories = [
@@ -18,6 +20,24 @@ const categories = [
 
 export default function NavBar() {
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
+  const auth = useContext(AuthContext);
+
+  // Verify user role
+  // null if not logged in
+  useEffect(()=>{
+    if(!auth.currentUser()){
+      console.log("not logged in")
+      if(userInfo) setUserInfo(null);
+      return;
+    }
+    getUserInfo().then((info)=>{
+      console.log("user info");
+      console.log(info);
+      setUserInfo(info);
+    })
+  }, []);
+
   useEffect(() => {
       const navBar = document.querySelector('.nav-icons');
       function handleClick(){

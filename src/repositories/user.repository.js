@@ -7,6 +7,7 @@ const config = require('../configs/general.config');
 const crypto = require('crypto');
 const transporter = require('../configs/email.config');
 const emailTemplate = require('../configs/emailTemplate');
+const { generateAuthToken } = require('../utils/jwt');
 
 exports.retrieveOne = async (id, result) => {
   try {
@@ -19,7 +20,7 @@ exports.retrieveOne = async (id, result) => {
       include: [
         {
           model: UserTypeModel,
-          attributes: ['title'],
+          attributes: ['type_id', 'title'],
         },
       ],
     })
@@ -103,7 +104,9 @@ exports.login = async (user, result) => {
         }
         if (bcrypt.compareSync(user.password, data.password)) {
           //TODO: session management
-          return result(null, responseHandler(true, 200, 'User logged in', null));
+          const token = generateAuthToken(data);
+
+          return result(null, responseHandler(true, 200, 'User logged in', {'accessToken': token}));
         }else{
           return result(responseHandler(false, 401, 'Wrong password', null), null);
         }

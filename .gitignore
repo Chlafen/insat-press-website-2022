@@ -107,6 +107,10 @@ dist
 
 upload/
 tmp/
+<<<<<<< HEAD
 
 # Database
 src/utils/dataImport/oldDB/*.json
+=======
+src/utils/dataImport/oldDB/*.json
+>>>>>>> 310b2167040c9e3de6b6695030126af578262008
