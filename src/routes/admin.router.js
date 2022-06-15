@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/')
   .get(
-    auth.isUserAuthed,
+    auth.authMiddleware,
     auth.verifyAccess(1), // Administrator
     adminController.allowAccess
   );
