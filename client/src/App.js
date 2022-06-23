@@ -18,6 +18,8 @@ import { apiGet } from './util/apiUtilities';
 
 const getCategories = async () => {
   const res = await apiGet('/api/categories');
+  console.log("categories");
+  console.log(res)
   return new Promise((resolve) => {
     resolve(
       res.data
@@ -55,7 +57,37 @@ function App() {
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
                 setHeaderVisible(false);
-                return (<AdminPanel/>)}}>
+                return (<AdminPanel pageIndex={0} />)}}>
+              </Route>
+              <Route exact path="/admin/users"
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(false);
+                return (<AdminPanel pageIndex={1} />)}}>
+              </Route>
+              <Route exact path="/admin/posts"
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(false);
+                return (<AdminPanel pageIndex={2} />)}}>
+              </Route>
+              <Route exact path="/admin/comments"
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(false);
+                return (<AdminPanel pageIndex={3} />)}}>
+              </Route>
+              <Route exact path="/admin/logs"
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(false);
+                return (<AdminPanel pageIndex={4} />)}}>
+              </Route>
+              <Route exact path="/admin/settings"
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(false);
+                return (<AdminPanel pageIndex={5} />)}}>
               </Route>
               <Route exact path="/ourteam"
                 render={()=>{

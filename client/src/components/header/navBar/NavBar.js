@@ -75,7 +75,13 @@ export default function NavBar() {
       </div>
       <ul className="nav-list">
         <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/'><li>Home</li></Link>
-      
+
+        {
+          userInfo && userInfo.user_type.type_id == 1 ? 
+          <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/admin'><li>Admin</li></Link> :
+          <></>
+        }
+
         <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/ourteam'><li>Our team</li></Link>
 
         <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/gallery'><li>Gallery</li></Link>
