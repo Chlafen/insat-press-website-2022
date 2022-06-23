@@ -25,22 +25,34 @@ export function apiPost(url, params={}){
   export function apiGet(url, params={}){
     const user = localStorage.getItem('user');
   
-    let headers;
+    let headers = {};
+    headers['Content-Type'] = 'application/json';
     if(user){
-      headers = {
-        "x-access-token": JSON.parse(user).accessToken, 'Content-Type': 'application/json'
-      }
+      headers['x-access-token'] = JSON.parse(user).accessToken;
     }
-    else {
-      headers = {'Content-Type': 'application/json'};
-    }
-    return axios.get(
-      url,
-      {
-        params: params,
-        headers:headers
-      }
-    );
+    return new Promise((resolve, reject)=>{
+      axios.get(
+        url,
+        {
+          params: params,
+          headers:headers
+        }
+      ).catch(async (err)=>{
+        if(err.response.status === 403){
+          if(err.response.data.error === "Invalid access token!"){
+            localStorage.removeItem('user');
+            await apiGet(url, params).then((res)=>{
+              resolve(res);
+            }).catch((err)=>{
+              reject(err);
+            })
+          }
+        }
+        reject(err);
+      }).then((res)=>{
+        resolve(res);
+      })
+    })
   }
   
   export function getUserInfo(){
@@ -52,6 +64,7 @@ export function apiPost(url, params={}){
         return null;
       })
       .catch((err)=>{
+        console.log("getUserInfo err") 
         console.log(err.response)
         return null;
       })
