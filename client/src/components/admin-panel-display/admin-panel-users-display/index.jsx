@@ -1,8 +1,9 @@
-import React from "react";
+import React, { createRef, useEffect, useState } from "react";
+import { apiGet } from "../../../util/apiUtilities";
 import LineNavigator from "../line-navigator";
 import './style.css';
 
-const users = [
+const users_test = [
   {
     "user_id": 1, 
     "username": "insatpress", 
@@ -11,7 +12,7 @@ const users = [
     "email": "insat.press@gmail.com", 
     "join_date": "2017-06-14 20:01:02", 
     "profile_pic": "/users/default_user1.png", 
-    "type_id": 1, 
+    user_type: { type_id: 1 },
     "is_verified": 0
   },
   {
@@ -22,7 +23,7 @@ const users = [
     "email": "saidanemongi@gmail.com", 
     "join_date": "2017-06-14 20:01:02", 
     "profile_pic": "/users/default_user1.png", 
-    "type_id": 2, 
+    user_type: { type_id: 2 },
     "is_verified": 0
   },
   {
@@ -33,7 +34,7 @@ const users = [
     "email": "chlafen.bafen@gmail.com", 
     "join_date": "2017-06-14 20:01:02", 
     "profile_pic": "/users/default_user1.png", 
-    "type_id": 2, 
+    user_type: { type_id: 2 },
     "is_verified": 0
   }
 ]
@@ -45,7 +46,58 @@ const roles = {
 }
 
 export default function AdminPanelUserDisplay({}) {
+  const [users, setUsers] = useState([]);
+  const [filterRole, setFilterRole] = useState(-1);
+  const [searchFilter, setSearchFilter] = useState("");
+  const [searchFilterOption, setSearchFilterOption] = useState("name");
+
   const AddUserButtonClick = ()=>{}
+
+  const isDisplayed = (user)=>{
+    if(user.user_type.type_id != filterRole && filterRole != -1) return false;
+    if(searchFilter != ""){
+      switch(searchFilterOption){
+        case "name": {
+          if((user.first_name +" "+user.last_name ).toUpperCase().search(searchFilter.toUpperCase()) == -1) return false
+          break;
+        }
+        case "email":{
+          if(user.email.toUpperCase().search(searchFilter.toUpperCase()) == -1) return false;
+          break;
+        }
+        case "id":{
+          if(user.user_id != searchFilter) return false;
+          break;
+        }
+      }
+    }
+    
+    return true;
+  }
+
+  const roleFilterChange = (new_value) =>{
+    setFilterRole(new_value.target.value)
+  }
+
+  const filterOptionChange = (new_value) =>{
+    setSearchFilterOption(new_value.target.value)
+  }
+
+  const filterTextChange = (target)=>{
+    setSearchFilter(target.target.value);
+  }
+
+  useEffect(()=>{
+    apiGet('/api/admin/users')
+      .then((data)=>{
+        console.log(data);
+        setUsers(data.data.data)
+      })
+      .catch((err)=>{
+        console.log("get users err");
+        console.log(err);
+      })
+  }, [])
 
   return (
     <div className="admin-panel-content-display">
@@ -84,12 +136,12 @@ export default function AdminPanelUserDisplay({}) {
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <input />
+          <input onChange={filterTextChange} />
           </span>
         </div>
         <div className="filter-input-area">
           <div>By</div>
-          <select>
+          <select onChange={filterOptionChange}>
           <option value={"name"} >Name</option>
           <option value={"email"} >EMail</option>
           <option value={"id"} >ID</option>
@@ -97,7 +149,7 @@ export default function AdminPanelUserDisplay({}) {
         </div>
         <div className="filter-input-area">
           <div>Show</div>
-          <select>
+          <select onChange={roleFilterChange}>
           <option value={-1} >All</option>
           {
             Object.keys(roles).map((key)=>{
@@ -133,10 +185,12 @@ export default function AdminPanelUserDisplay({}) {
           <tbody>
           {
             users.map((user, ind)=>{
+              if(!isDisplayed(user)) return <></>
+
               return <tr key={ind}>
                 <td><input type={"checkbox"} /></td>
                 <td>
-                  <img src={"http://localhost:3001"+user.profile_pic} />
+                  <img src={"http://localhost:3001"+(user.profile_pic.length === 0 ? "/users/default_user1.png" : user.profile_pic)} />
                   <div className="user-details">
                     <div>{user.first_name + " " + user.last_name}</div>
                     <div>{user.username}#{user.user_id}</div>
@@ -149,7 +203,7 @@ export default function AdminPanelUserDisplay({}) {
                   {user.is_verified ? "Yes" : "No"}
                 </td>
                 <td>
-                  {roles[user.type_id]}
+                  {roles[user.user_type.type_id]}
                 </td>
                 <td>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">

@@ -8,7 +8,7 @@ export default function LineNavigator({sections}) {
         sections.map((section, ind)=>{
           return (
             <>
-              <div
+              <div key={ind}
                 onClick={()=>{
                   window.location.href = section.redirection;
                 }}
@@ -16,7 +16,7 @@ export default function LineNavigator({sections}) {
                   {section.title}
               </div>
 
-              {ind === sections.length-1 ? <></> : <div>{">"}</div> }
+              {ind === sections.length-1 ? <></> : <div key={ind+"sep"}>{">"}</div> }
             </>
           );
         })

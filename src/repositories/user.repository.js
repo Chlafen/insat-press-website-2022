@@ -40,6 +40,34 @@ exports.retrieveOne = async (id, result) => {
   }
 };
 
+exports.retrieveAll = async (result) => {
+  try {
+
+    await UserModel.findAll({
+      attributes: ['user_id', 'username', 'email', 'first_name', 'last_name', 'profile_pic', 'is_verified'],
+      include: [
+        {
+          model: UserTypeModel,
+          attributes: ['type_id'],
+        },
+      ],
+    })
+      .then((data) => {
+        if (!data) {
+          return result(responseHandler(false, 404, 'No users not found', null), null);
+        }
+        return result(null, responseHandler(true, 200, 'User found', data));
+      })
+      .catch((err) => {
+        console.log(err);
+        return result(responseHandler(false, 500, 'Server Error', null), null);
+      });
+  } catch (err) {
+    console.log(err);
+    return result(responseHandler(false, 500, 'Server Error', null), null);
+  }
+};
+
 exports.register = async (user, result) => {
   let trsct;
   try {
