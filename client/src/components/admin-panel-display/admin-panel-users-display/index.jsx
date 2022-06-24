@@ -97,6 +97,13 @@ export default function AdminPanelUserDisplay({}) {
         console.log("get users err");
         console.log(err);
       })
+    
+    document.body.addEventListener("click", (event)=>{
+      if(event.target.classList.contains("no-close-effect")) return;
+      
+      let visible = document.querySelector(".user-list-manage-dropdown-visible");
+      if(visible) visible.classList.remove("user-list-manage-dropdown-visible")
+    })
   }, [])
 
   return (
@@ -206,9 +213,23 @@ export default function AdminPanelUserDisplay({}) {
                   {roles[user.user_type.type_id]}
                 </td>
                 <td>
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <svg onClick={()=>{
+                    let visible = document.querySelector(".user-list-manage-dropdown-visible");
+                    let current = document.querySelector("#manage-user-"+user.user_id);
+
+                    if(visible == current){
+                      current.classList.remove("user-list-manage-dropdown-visible")
+                    }else{
+                      if(visible) visible.classList.remove("user-list-manage-dropdown-visible")
+                      current.classList.add("user-list-manage-dropdown-visible")
+                    }
+                  }} xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 no-close-effect" viewBox="0 0 20 20" fill="currentColor">
                     <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                   </svg>
+                  <div id={"manage-user-"+user.user_id} className="user-list-manage-dropdown no-close-effect">
+                    <div className="no-close-effect">Change user info</div>
+                    <div className="no-close-effect">Reset password</div>
+                  </div>
                 </td>
               </tr>
             })

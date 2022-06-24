@@ -100,6 +100,7 @@
 
 .users-display td:last-child{
     padding-right: 5px;
+    position: relative;
 }
 
 .users-display td:nth-child(1){
@@ -155,4 +156,34 @@
     margin-left: 25px;
     color: rgb(143, 138, 138);
     font-size: 0.9rem;
+}
+
+.user-list-manage-dropdown{
+    display: none;
+    position: absolute;
+    left: -120px;
+    width: 150px;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.user-list-manage-dropdown-visible{
+    display: block
+}
+
+.user-list-manage-dropdown div {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.user-list-manage-dropdown div:hover{
+    background-color: rgba(0, 0, 0, 0.123);
+}
+
+.user-list-manage-dropdown div:not(:last-child){
+    border-bottom: 1px solid #000;
 }
