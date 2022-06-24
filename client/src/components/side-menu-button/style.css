@@ -36,6 +36,8 @@
 }
 
 .side-menu-button-icon{
+    display: flex;
+    align-items: center;
     width: 30px;
 }
 

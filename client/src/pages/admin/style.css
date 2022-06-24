@@ -1,11 +1,5 @@
 .admin-page-container{
     display: flex;
-    width: 100vw;
+    width: 99vw;
     height: 100vh;
-}
-
-.admin-panel-content-display{
-    height: 100vh;
-    padding-left: 25px;
-    padding-top: 25px;
 }

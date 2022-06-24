@@ -1,7 +1,7 @@
 
 .line-navigator{
     display: flex;
-    gap: 15px;
+    gap: 5px;
     color: #abb0b3;
     font-size: 0.8rem;
 }
@@ -16,7 +16,7 @@
 }
 
 .navigator-selected-section{
-    background-color: #be262388;
+    background-color: #be26232f;
     border-radius: 10px;
     color: #000;
     padding-left: 10px !important;

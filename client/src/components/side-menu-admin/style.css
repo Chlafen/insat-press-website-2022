@@ -2,12 +2,14 @@
     background-color: #3D3D3D;
     width: 20vw;
     min-width: 220px;
-    height: max-content;
+    height: 100vh;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 20px;
+    position: fixed;
+    overflow-y: auto;
 }
 
 .menu-user-name{

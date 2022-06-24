@@ -1,0 +1,15 @@
+.admin-panel-content-display{
+    height: 100vh;
+    width: calc(99vw - max(20vw, 220px) - 25px);
+    margin-left: max(20vw, 220px);
+    padding-left: 25px;
+    padding-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-panel-section-title{
+    text-align: left;
+    font-weight: bold;
+    font-size: 2rem;
+}

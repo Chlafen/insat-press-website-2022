@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import AdminPanelCommentsDisplay from './admin-panel-comments-display';
+import AdminPanelDashboardDisplay from './admin-panel-dashboard-display';
 import AdminPanelLogsDisplay from './admin-panel-logs-display';
 import AdminPanelPostsDisplay from './admin-panel-posts-display';
 import AdminPanelSettingsDisplay from './admin-panel-settings-display';
 import AdminPanelUserDisplay from './admin-panel-users-display';
+import './style.css';
 
 export default function AdminPanelDisplay({selectedPageIndex}) {
     return (
@@ -12,7 +14,7 @@ export default function AdminPanelDisplay({selectedPageIndex}) {
                 (()=>{
                     switch(selectedPageIndex){
                         case 0:{
-                            return <></>;
+                            return <AdminPanelDashboardDisplay />;
                         }
                         case 1:{
                             return <AdminPanelUserDisplay />;
