@@ -51,7 +51,9 @@ export default function AdminPanelUserDisplay({}) {
   const [searchFilter, setSearchFilter] = useState("");
   const [searchFilterOption, setSearchFilterOption] = useState("name");
 
-  const AddUserButtonClick = ()=>{}
+  const AddUserButtonClick = ()=>{
+    window.location.href = "/admin/users/new";
+  }
 
   const isDisplayed = (user)=>{
     if(user.user_type.type_id != filterRole && filterRole != -1) return false;
@@ -100,7 +102,7 @@ export default function AdminPanelUserDisplay({}) {
     
     document.body.addEventListener("click", (event)=>{
       if(event.target.classList.contains("no-close-effect")) return;
-      
+
       let visible = document.querySelector(".user-list-manage-dropdown-visible");
       if(visible) visible.classList.remove("user-list-manage-dropdown-visible")
     })

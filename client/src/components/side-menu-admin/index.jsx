@@ -37,7 +37,7 @@ export default function SideMenuPanel({items, user, selectedIndex}) {
               }}
               data={value}
               key={ind}
-              selected={selectedIndex === ind}
+              selected={ value.indexes.includes(selectedIndex) }
             />;
           })
         }

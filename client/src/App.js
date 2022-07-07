@@ -65,6 +65,12 @@ function App() {
                 setHeaderVisible(false);
                 return (<AdminPanel pageIndex={1} />)}}>
               </Route>
+              <Route exact path="/admin/users/new"
+              render={()=>{
+                setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(false);
+                return (<AdminPanel pageIndex={6} />)}}>
+              </Route>
               <Route exact path="/admin/posts"
               render={()=>{
                 setHeaderTransparent(window.location.pathname === '/');
