@@ -66,7 +66,7 @@ export default function Category(props) {
         loader={<div className="loader" key={0}>Loading ...</div>}
       >
         {posts[1].map((post, index) => {
-          return (<SectionPosts key={index} postData={post} categPage/>)
+          return (<SectionPosts key={index} sectionData={post} categPage/>)
         })}
       </InfiniteScroll>
     </div>

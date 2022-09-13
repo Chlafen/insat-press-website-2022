@@ -3,6 +3,9 @@ const Sequelize = require('sequelize');
 const db = require('../configs/db.config');
 const { responseHandler } = require('../helpers/handlers');
 const { PostModel, PostTagModel, UserModel, CategoryModel, PostCategoryModel, AttachmentModel } = require('../models');
+const axios = require('axios');
+const { query } = require('express');
+
 
 exports.createPost = async (newPost, result) => {
   let trsct;
@@ -190,6 +193,74 @@ exports.getPostsByCategory = async (slug, limit, offset, result) => {
 
   if(queryResult == null) 
     result(responseHandler(false, 404, 'There isn\'t any post by this category', null), null);
+  else
+    return result(null, responseHandler(true, 200, 'Success', queryResult));
+}
+
+exports.getVideos = async (limit, result) => {
+  limit = limit || 999999;
+  let queryResult = await axios.get(`https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${process.env.PRESS_YT_KEY}&key=${process.env.GOOGLE_API_KEY}&part=snippet&maxResults=${limit}`)
+    .catch(err => {
+      console.log(err);
+      result(responseHandler(false, 500, 'Something went wrong!', null), null);
+    });
+  if(queryResult == null)
+  result(responseHandler(false, 404, 'There isn\'t any video', null), null);
+  else{
+    //get views for each video
+    const videoIds = queryResult.data.items.map((e) => e.snippet.resourceId.videoId);
+
+    const videoViews = await axios.get(`https://www.googleapis.com/youtube/v3/videos?id=${videoIds.join(',')}&key=${process.env.GOOGLE_API_KEY}&part=statistics`)
+      .catch(err => {
+        console.log(err);
+        result(responseHandler(false, 500, 'Something went wrong!', null), null);
+      });
+    if(videoViews == null)
+      result(responseHandler(false, 404, 'There isn\'t any video', null), null);
+    else{
+      //merge views with video data
+      queryResult.data.items.forEach((e, i) => {
+        e.snippet.statistics = videoViews.data.items[i].statistics;
+      } );
+      let res = queryResult.data.items.map((e) => 
+      {
+        return { 
+          title: e.snippet.title,
+          description: e.snippet.description,
+          thumbnail: e.snippet.thumbnails.medium.url, 
+          views: e.snippet.statistics.viewCount,
+          url: `https://www.youtube.com/watch?v=${e.snippet.resourceId.videoId}`
+        }
+      })
+      return result(null, responseHandler(true, 200, 'Success', res.slice(0, limit)));
+    }
+  }
+}
+
+exports.getLatest = async (limit, result) => { 
+  let queryResult = await PostModel.findAll({
+    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count'],
+    limit: limit,
+    order: [['post_date', 'DESC']],
+    where: {
+      type: 'public'
+    },
+    include: [
+      {
+        model: UserModel,
+        attributes: ['first_name', 'last_name'],
+      },
+      {
+        model: CategoryModel,
+        attributes: ['category_name'],
+      },
+    ]
+  }).catch(err => {
+    console.log(err);
+    result(responseHandler(false, 500, 'Something went wrong!', null), null);
+  });
+  if(queryResult == null) 
+    result(responseHandler(false, 404, 'No posts', null), null);
   else
     return result(null, responseHandler(true, 200, 'Success', queryResult));
 }

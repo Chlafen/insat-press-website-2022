@@ -70,3 +70,34 @@ exports.getPostsByCategory = asyncHandler(async (req, res) => {
     return res.status(error.code).json(error);
   }
 });
+
+exports.getVideos = asyncHandler(async (req, res) => {
+  try{
+    const limit = req.query.limit * 1 || 5;
+    await postService.getVideos(limit, (err, data) => {
+      if(err) {
+        return res.status(err.code).json(err);
+      }
+      return res.status(data.code).json(data);
+    });
+  }catch(error) {
+    console.log(error);
+    return res.status(error.code).json(error);
+  }
+});
+
+exports.getLatest = asyncHandler(async (req, res) => {
+  try{
+    const limit = req.params.limit * 1;
+    
+    await postService.getLatest(limit, (err, data) => {
+      if(err) {
+        return res.status(err.code).json(err);
+      }
+      return res.status(data.code).json(data);
+    });
+  }catch(error) {
+    console.log(error);
+    return res.status(error.code).json(error);
+  }
+});

@@ -4,13 +4,20 @@ const { postController } = require('../controllers');
 
 const router = express.Router();
 
-router.route('/:id')
-  .get(postController.getSinglePost)
 
 router.route('/')
-  .post(postController.createPost)
+.post(postController.createPost)
 
 router.route('/category/:slug')
-  .get(postController.getPostsByCategory)
+.get(postController.getPostsByCategory)
+
+router.route('/videos')
+.get(postController.getVideos)
+
+router.route('/:id')
+  .get(postController.getSinglePost)
+  
+router.route('/latest/:limit')
+  .get(postController.getLatest)
 
 module.exports = router;

@@ -9,10 +9,10 @@ const Category = (props) => {
   return (
     <div className="category">
       <div className='category-txt'>
-        <span>{props.category}</span>
+        <span>{props.category.name}</span>
         {props.isLink ? 
           (
-            <Link to={'/category/'+props.category.toLowerCase().replace(/\s+/g, '')} className="category-see-all"> 
+            <Link to={'/category/'+props.category.slug} className="category-see-all"> 
               <span>SEE ALL</span>
               <MdOutlineArrowRightAlt/>
             </Link>

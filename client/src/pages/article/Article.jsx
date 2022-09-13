@@ -15,6 +15,7 @@ import { Redirect } from "react-router-dom";
 import {formatPost} from './fomratPost';
 import { useQuery } from '../../util/utilities';
 import { apiGet } from '../../util/apiUtilities';
+import format from '../../util/format';
 
 
 const iconSize = 30;
@@ -33,6 +34,39 @@ const postData2 = {
   comments: 15,
   url: '/'
 }
+
+const tmpPosts = [
+  {
+      "post_id": 12553,
+      "category": "Non classé",
+      "createdAt": "3 months",
+      "title": "Ghosts in the Mirror",
+      "author_name": "Saihi Hachem ",
+      "image_path": "https://insatpress.tn/wp-content/uploads/2022/02/1645901743666-1.png",
+      "view_count": 840,
+      "content": " ez ez"
+  },
+  {
+      "post_id": 12544,
+      "category": "Non classé",
+      "createdAt": "4 months",
+      "title": "",
+      "author_name": "Insatpress ",
+      "image_path": "",
+      "view_count": 583,
+      "content": " ez ez"
+  },
+  {
+      "post_id": 12488,
+      "category": "Non classé",
+      "createdAt": "6 months",
+      "title": "\"The Moors Murders\"",
+      "author_name": "Yasmine Piccioni ",
+      "image_path": "",
+      "view_count": 532,
+      "content": " ez ez"
+  }
+]
 
 export default function Article() {
   const [postData1, setPostData1] = useState({});
@@ -169,7 +203,7 @@ export default function Article() {
         <Category category="SIMILAR TO THIS" isLink={false} />
       </div>
 
-      <SectionPosts postData={[postData1, postData1, postData1]}/>
+      <SectionPosts sectionData={tmpPosts}/>
     </div>
   )
 }

@@ -15,6 +15,7 @@ import { AuthContainer, AuthContext } from './context/authContext';
 import AdminPanel from './pages/admin';
 import Category from './pages/category/Category';
 import { apiGet } from './util/apiUtilities';
+import Video from './pages/video/Video';
 
 const getCategories = async () => {
   const res = await apiGet('/api/categories');
@@ -110,6 +111,12 @@ function App() {
                   setHeaderTransparent(window.location.pathname === '/');
                 setHeaderVisible(true);
                 return (<Article/>)}}>
+              </Route>
+              <Route exact path="/video"
+                render={()=>{
+                  setHeaderTransparent(window.location.pathname === '/');
+                setHeaderVisible(true);
+                return (<Video/>)}}>
               </Route>
               <Route exact path="/editor"
               render={()=>{

@@ -7,7 +7,7 @@ const LatestNews = (props) => {
     <div className="latest-news">
       <p className="latest-news-title">Latest News</p>
       <div className="latest-news-list">
-        <SquarePostFrame postData={props.postData [0]}/>
+        <SquarePostFrame postData={props.postData[0]}/>
         <div className="vertical-separator"></div>
         <SquarePostFrame postData={props.postData[1]}/>
         <div className="vertical-separator"></div>
