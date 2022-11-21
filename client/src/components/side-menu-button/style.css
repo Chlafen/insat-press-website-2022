@@ -1,0 +1,51 @@
+.side-menu-button{
+    width: 80%;
+    min-height: 50px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    gap: 10px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.hover-effect{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+
+.hover-effect:hover{
+    background-color: rgba(53, 53, 53, 0.171);
+
+}
+
+.selected-side-menu-button{
+    position: absolute;
+    width: 13px;
+    height: 100%;
+    background-color: #af0909;
+    left: 0;
+}
+
+.side-menu-button-icon{
+    display: flex;
+    align-items: center;
+    width: 30px;
+}
+
+.side-menu-button-icon svg{
+    width: 100%;
+}
+
+.side-menu-button-icon img{
+    width: 100%;
+    border-radius: 15px;
+}

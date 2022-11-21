@@ -1,0 +1,24 @@
+
+.line-navigator{
+    display: flex;
+    gap: 5px;
+    color: #abb0b3;
+    font-size: 0.8rem;
+}
+
+.line-navigator div{
+    padding: 5px;
+}
+
+.line-navigator-section {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.navigator-selected-section{
+    background-color: #be26232f;
+    border-radius: 10px;
+    color: #000;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}

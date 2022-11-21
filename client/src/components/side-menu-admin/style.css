@@ -1,0 +1,44 @@
+.side-menu-container{
+    background-color: #3D3D3D;
+    width: 20vw;
+    min-width: 220px;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    position: fixed;
+    overflow-y: auto;
+}
+
+.menu-user-name{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+.menu-user-pic{
+    width: 25%;
+    border-radius: 100%;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+.menu-user-pic img{
+    width: 100%;
+    height: 100%;
+}
+
+.menu-user-info{
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.return-to-site{
+    margin-bottom: 15px;
+}

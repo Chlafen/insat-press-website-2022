@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 const { Log } = require('../models');
 
-const isUserAuthed = (req, res, next)=>{
+const authMiddleware = (req, res, next)=>{
     const token = req.headers["x-access-token"];
     if(!token){
       // TODO: Not authed
@@ -55,7 +55,7 @@ const verifyAccess = (role_id) =>{
 }
 
 module.exports = {
-    isUserAuthed,
+    authMiddleware,
     verifyAccess,
     getUserId,
 };

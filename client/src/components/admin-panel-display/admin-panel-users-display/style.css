@@ -1,0 +1,194 @@
+.admin-panel-row{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.admin-panel-add-user{
+    display: flex;
+    font-size: 0.9rem;
+    align-items: center;
+    border-radius: 25px;
+    border: 2px solid #eeeeee;
+    background-color: #fefefe;
+    padding: 5px 15px 5px 15px;
+    cursor: pointer;
+}
+
+.admin-panel-add-user svg{
+    width: 25px;
+    height: 25px;
+}
+
+.admin-panel-top-margin{
+    margin-top: 25px;
+}
+
+.admin-panel-sides-padding{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.admin-panel-content-display hr{
+    color: rgba(128, 128, 128, 0.637);
+}
+
+.admin-panel-filter-area{
+    display: flex;
+    /* position: relative; */
+    background-color: rgba(221, 217, 208, 0.589);
+    border-radius: 5px;
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    justify-content: space-evenly;
+}
+
+.filter-input-area div{
+    text-align: left;
+    font-weight: bold;
+    color: rgb(44, 43, 43);
+}
+
+.filter-input-area input{
+    border-radius: 5px;
+    border: 1px solid rgb(182, 180, 180);
+    min-height: 30px;
+    margin-top: 5px;
+    padding-left: 30px;
+}
+
+.filter-input-area select{
+    border-radius: 5px;
+    border: 1px solid rgb(182, 180, 180);
+    min-height: 30px;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    min-width: 150px;
+}
+
+.filter-input-area span{
+    position: relative;
+}
+
+.filter-input-area svg{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 5px;
+}
+
+.users-display{
+    width: 100%;
+    border-spacing: 0;
+    margin-bottom: 75px;
+}
+
+.users-display input[type="checkbox"]{
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.user-list-container{
+    width: 100%;
+}
+
+.users-display td:last-child{
+    padding-right: 5px;
+    position: relative;
+}
+
+.users-display td:nth-child(1){
+    width: fit-content;
+}
+
+.users-display td:nth-child(6) svg{
+    width: 25px;
+    cursor: pointer;
+}
+
+.users-display > tr:first-child > td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.users-display > tbody > tr:nth-of-type(2n){
+    background-color: #e9e9e9;
+}
+
+.users-display > tr:first-child{
+    background-color: #ea6153;
+    font-weight: 900;
+    color: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.users-display tbody td:nth-child(2){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    text-align: left;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.users-display tbody td:nth-child(5){
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.users-display tbody td:nth-child(2) img{
+    width: 18%;
+    border-radius: 25px;
+}
+
+.user-details{
+    width: 50%;
+}
+
+.user-details div:first-child{
+    font-size: 1rem;
+}
+
+.user-details div:last-child{
+    margin-left: 25px;
+    color: rgb(143, 138, 138);
+    font-size: 0.9rem;
+}
+
+.user-list-manage-dropdown{
+    display: none;
+    position: absolute;
+    left: -120px;
+    width: 150px;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius: 10px;
+}
+
+.user-list-manage-dropdown-visible{
+    display: block
+}
+
+.user-list-manage-dropdown div {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+
+.user-list-manage-dropdown div:hover{
+    background-color: rgba(0, 0, 0, 0.123);
+}
+
+.user-list-manage-dropdown div:not(:last-child){
+    border-bottom: 1px solid #000;
+}
