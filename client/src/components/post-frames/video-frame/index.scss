@@ -1,0 +1,49 @@
+.video-frame{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 4px;
+  height: 100%;
+  .video-frame-img{
+    width: 100%;
+    max-width: 320px;
+    max-height: 180px;
+    background-color: gray;
+    img{
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .video-frame-text{
+    color: black;
+    font-family: karla;
+    max-width: 320px;
+    font-size: 0.95rem;  
+    flex-grow: 1;
+    text-align: start;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .video-views{
+    color: #5e5e5e;
+    font-family: karla;
+    font-size: 0.9rem;
+    text-align: start;
+    text-decoration: none;
+    justify-self: flex-end;
+  }
+}
+
+@media screen and(max-width:478px) {
+  .video-frame{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    .video-frame-img{
+      max-width: 320px;
+      max-height: 180px;
+    }
+  }
+  
+}

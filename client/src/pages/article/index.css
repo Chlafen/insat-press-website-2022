@@ -135,6 +135,7 @@
   font-family: Karla;
   line-height: 140%;
   font-size: clamp(1rem, 0.7864rem + 0.7273vw, 1.5rem);
+  flex-grow: 1;
 }
 
 

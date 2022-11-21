@@ -1,22 +1,42 @@
 const jwt = require('jsonwebtoken');
+const { Log } = require('../models');
 
 const isUserAuthed = (req, res, next)=>{
     const token = req.headers["x-access-token"];
-    console.log("------tokennn" + token);
     if(!token){
-        // TODO: Not authed
-        return res.status(401).json({error: "You need to signin!"});
+      // TODO: Not authed
+      console.log("  No token provided");
+      return res.status(401).json({error: "You need to signin!"});
     }
 
     jwt.verify(token, process.env.JWT_SESSION_SECRET, {algorithm: 'HS256'}, (err, user) =>{
         if(err){
             // TODO: Invalid token
+            console.log('  JWT error:', err.message);
             return res.status(403).json({error: "Invalid access token!"});
         }
-        console.log("----------------logging user" + user);
+        console.log("  User authorized successfully...");
+        console.log("  ", user);
         req.user = user;
         next();
     });
+}
+
+/**
+ * 
+ * @description adds user info to the request object
+ */
+const getUserId = (req, res, next) =>{
+  const token = req.headers["x-access-token"];
+  req.user = null;
+  if(token){
+    jwt.verify(token, process.env.JWT_SESSION_SECRET, {algorithm: 'HS256'}, (err, user) =>{
+      if(!err){
+        req.user = user;
+      }
+    });
+  }
+  next();
 }
 
 const verifyAccess = (role_id) =>{
@@ -37,4 +57,5 @@ const verifyAccess = (role_id) =>{
 module.exports = {
     isUserAuthed,
     verifyAccess,
+    getUserId,
 };

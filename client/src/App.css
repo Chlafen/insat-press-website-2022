@@ -4,18 +4,23 @@
   flex-direction: column;
   min-height: 100vh;
   justify-content: space-between;
+  position: relative;
 }
 
 .content > *{
   flex-grow: 1;
 }
 
+.margin-header{
+  padding-bottom: 10rem;
+}
+
 .margin-header > *{
-  margin-top: clamp(12rem, 4.2500rem + 10.0000vw, 14.25rem);
+  margin-top: clamp(12rem, 4.2500rem + 10.0000vw, 14.25rem) !important;
 }
 
 @media screen and (max-width:800px) {
-  .content > * {
+  .margin-header > * {
     margin-top: 6rem !important;
   }
 }

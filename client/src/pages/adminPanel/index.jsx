@@ -9,25 +9,24 @@ export default function AdminPanel() {
   // Verify user role
   // null if not logged in
   useEffect(()=>{
-    if(!auth.currentUser()){
-      console.log("not logged in")
-      window.location.href = '/';
-      return;
-    }
 
     getUserInfo().then((info)=>{
-      console.log("user info");
-      console.log(info);
-      setUserInfo(info);
+      if(!info){
+        //not logged in
+        window.location.href = '/login';
+        return;
+      }
       if(info.user_type.type_id !== 1){
-        console.log("not allowed")
+        //not admin
+        console.log("unauthorized")
         window.location.href = '/';
         return;
       }
+      setUserInfo(info);
     })
   }, []);
 
-  return (
+  return userInfo?(
     <div>
       This is admin panel<br/>
       This is admin panel<br/>
@@ -37,5 +36,5 @@ export default function AdminPanel() {
       This is admin panel<br/>
       This is admin panel<br/>
     </div>
-  );
+  ):null;
 }

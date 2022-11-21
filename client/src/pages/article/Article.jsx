@@ -11,45 +11,33 @@ import {
 import Category from '../../components/category/Category';
 import SectionPosts from '../../components/section-posts/SectionPosts';
 import Testpostframe from '../../components/post-frames/test-post-frame/TestPostFrame';
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {formatPost} from './fomratPost';
 import { useQuery } from '../../util/utilities';
 import { apiGet } from '../../util/apiUtilities';
-
+import format from '../../util/format';
+import {getCategoryPosts} from '../../util/articleRequests';
 
 const iconSize = 30;
 
-const postData2 = {
-  title: 'Project Axis, a new axis newly created by IEEE INSAT',
-  category: 'Football',
-  timeOfPost: new Date(),
-  author: 'Nessrine Baltouni',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-  img: {
-    imgUrl: 'images/post3.jpg',
-    alt: 'A picture'
-  },
-  views: 158,
-  comments: 15,
-  url: '/'
+async function getPostData(pid){
+  const postData = await apiGet('/api/posts/'+pid, {params:{pid:pid}}); 
+  return new Promise((resolve) => {
+    resolve(
+      postData.data
+    );
+  }
+  );//handle errz
 }
 
 export default function Article() {
   const [postData1, setPostData1] = useState({});
   const [redirect, setRedirect] = useState(false);
+  const [categoryPosts, setCategoryPosts] = useState([]);
   let query = useQuery(); // this is the query params
   const post_id = query.get("pid");
-  
+  //getpost
   useEffect(() => {
-    async function getPostData(pid){
-      const postData = await apiGet('/api/posts/'+post_id, {params:{pid:pid}}); 
-      return new Promise((resolve) => {
-        resolve(
-          postData.data
-        );
-      }
-      );//handle errz
-    }
     getPostData(post_id)
     .then(data =>{  
       const post = formatPost(data.data);
@@ -62,17 +50,39 @@ export default function Article() {
   }, []);
 
   useEffect(() => {
+    let sideTextPosts = []; 
+    getCategoryPosts(postData1.category_slug, 7)
+        .then(posts => {
+          let catPosts = []
+          catPosts = posts.map(post => {
+            return format(post)
+          });
+          return catPosts;
+        })
+        .then(catPosts => { 
+          catPosts.forEach(post => {
+            sideTextPosts.push(
+              post
+            );
+          });
+          setCategoryPosts(sideTextPosts); 
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  }, [postData1]);
+
+  useEffect(() => {
     let btns = document.querySelector(".react-share__ShareButton") //bug with the class
     while(btns){
       btns.classList.remove("react-share__ShareButton")
       btns = document.querySelector(".react-share__ShareButton")
     }
-    btns=document.querySelector(".countset");
-    console.log(btns)
+    btns=document.querySelector(".countset"); 
   }, []);
   
   return (
-    redirect ? <Redirect to="/error404" /> :
+    redirect ? <Navigate  to="/error404" /> :
     <div className="article">
       {/* facebook comments integration */}
       <div className="p-header">
@@ -88,7 +98,7 @@ export default function Article() {
         <div className="p-author-info">
           <div className="p-author-img">
             { postData1.profile_pic ?
-              <img src={"http://localhost:3001"+postData1.profile_pic} alt="author-img"/> :
+              <img src={postData1.profile_pic} alt=""/> :
               <div></div>
             }
           </div>
@@ -118,11 +128,12 @@ export default function Article() {
         <div className="p-v-sep toggle-p"></div>
 
         <div className="p-text-post-list toggle-p">
-          <Testpostframe postData={postData2}/>
-          <Testpostframe postData={postData2}/>
-          <Testpostframe postData={postData2}/>
-          <Testpostframe postData={postData2}/>
-          <Testpostframe postData={postData2}/>
+          {
+            categoryPosts.length > 0 ?
+            categoryPosts.map((post,i) => {
+              return  <Testpostframe postData={post} key={i}/>
+              }) : <div></div> 
+          }
         </div>
       </div>
 
@@ -153,7 +164,7 @@ export default function Article() {
           </LinkedinShareButton>
         </div>
       </div>  
-      <div className="comments">
+      {/* <div className="comments">
         <div className="top-comment">
           <p className='comment-title'>
             The Conversation
@@ -161,15 +172,18 @@ export default function Article() {
           <p className="comment-subtitle">Start a discussion, not a fire, Post a comment</p>
         </div>
         <div className="p-horizontal-sep" style={{height:'2px'}}></div>
-        {/* <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1045606652975082&autoLogAppEvents=1" nonce="aYijSYxU"></script> */}
+        <div id="fb-root"></div>
+        <script async defer crossOrigin="anonymous" 
+          src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v13.0&appId=1045606652975082&autoLogAppEvents=1" 
+          nonce="aYijSYxU">
+        </script> 
         <div className="fb-comments" data-href={"http://localhost:3000/post?pid="+post_id} data-width="" data-numposts="5"></div>
-      </div>
+      </div> */}
       <div className="post-seemore">
-        <Category category="SIMILAR TO THIS" isLink={false} />
+        <Category category={{name:"SIMILAR TO THIS"}} isLink={false} />
       </div>
 
-      <SectionPosts postData={[postData1, postData1, postData1]}/>
+      <SectionPosts sectionData={categoryPosts.length>0?categoryPosts.slice(0,3):[]  }/>
     </div>
   )
 }

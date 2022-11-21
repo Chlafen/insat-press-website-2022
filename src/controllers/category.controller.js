@@ -6,13 +6,13 @@ exports.getAll = asyncHandler(async (req, res) => {
     const limit = req.query.limit ? req.query.limit * 1 : 99;
     await categoryService.getAll(limit, (err, data) => {
       if(err) {
-        console.log(err);
+        console.log(__errlogclr, err);
         return res.status(err.code).json(err);
       }
       return res.status(data.code).json(data);
     });
   }catch(error) {
-    console.log(error);
+    console.log(__errlogclr, error);
     return res.status(error.code).json(error);
   }
 });

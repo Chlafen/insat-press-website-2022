@@ -51,12 +51,12 @@ export default function Login() {
           <div className="login-form">
               <img  src={process.env.PUBLIC_URL + "logo.png" }alt="" />
               <div className="form__field">
-                <label for="login__username">
+                <label htmlFor="login__username">
                   <MdLogin/>
                   <span className="hidden">Username</span>
                 </label>
                 <input 
-                  autocomplete="username" 
+                  autoComplete="username" 
                   id="login__username" 
                   type="text" 
                   name="username" 
@@ -68,7 +68,7 @@ export default function Login() {
               </div>
 
               <div className="form__field">
-                <label for="login__password">
+                <label htmlFor="login__password">
                   <MdLock/>
                   <span className="hidden">Password</span>
                 </label>

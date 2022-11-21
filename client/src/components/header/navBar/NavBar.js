@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { FaAngleDown, } from "react-icons/fa"
 import { RiMenuLine, RiCloseLine } from "react-icons/ri";
 import { AuthContext } from '../../../context/authContext';
-import { apiGet, getUserInfo } from '../../../util/apiUtilities'; 
+import { getUserInfo } from '../../../util/apiUtilities'; 
+import NavProfile from './navProfile/NavProfile';
 
-export default function NavBar() {
+export default function NavBar(props) {
   const [toggleMenu, setToggleMenu] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
   const auth = useContext(AuthContext);
@@ -15,34 +16,19 @@ export default function NavBar() {
   // null if not logged in
   useEffect(()=>{
     if(!auth.currentUser()){
-      console.log("not logged in")
       if(userInfo) setUserInfo(null);
       return;
     }
     getUserInfo().then((info)=>{
-      console.log("user info");
-      console.log(info);
       setUserInfo(info);
     })
   }, []);
   const [categories, setCategories] = useState([]);
   const [width, setWidth] = useState(window.innerWidth);
 
-  const getCategories = async () => {
-    const res = await apiGet('/api/categories');
-    return new Promise((resolve) => {
-      resolve(
-        res.data
-      );
-    });
-  };
-
   useEffect(() => {
-    getCategories().then(res => {
-      const cats = res.data
-      setCategories(cats);
-    });
-  }, [])
+    setCategories(props.categories)
+  }, [props.categories])
 
   useEffect(() => {
       const navBar = document.querySelector('.nav-icons');
@@ -66,6 +52,7 @@ export default function NavBar() {
   }
   return (
     <div className={`nav-bar ${toggleMenu ? " open-menu" : " close-menu"}`}>
+      <div className="filler-for-symmetry"></div>
       <div className="nav-logo">
         <img src={process.env.PUBLIC_URL + "logo.png"}/>
       </div>
@@ -99,12 +86,11 @@ export default function NavBar() {
           </li>
         </div>
         <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/contact'><li>Contact</li></Link>
-        <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/about'><li>About us</li></Link>
+        {/* <Link className="link-nav" onClick={(e)=>closeNavList(e)} to='/about'><li>About us</li></Link> */}
         {/*profile*/}
-        {/* <li>
-
-        </li> */}
+ 
       </ul>
+      <NavProfile userData={userInfo}/>
     </div>
   )
 }

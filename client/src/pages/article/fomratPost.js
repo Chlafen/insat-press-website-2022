@@ -10,9 +10,10 @@ const getPrimaryCategory =  function(data){
   }else  return '';
 } 
 
-export function formatPost(post) {
+export function formatPost(post) { 
   return {
     category: getPrimaryCategory(post)[0].category_name,
+    category_slug: getPrimaryCategory(post)[0].category_slug,
     createdAt: DDMMYYYY(convertSqlDateToJsDate(post.post_date)),
     title: post.post_title,
     author_name: capitalize(post.user.first_name + ' ' + post.user.last_name),

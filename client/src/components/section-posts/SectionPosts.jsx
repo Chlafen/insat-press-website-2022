@@ -8,9 +8,12 @@ const widthToChangeToSquarePosts = 500;
 
 export default function SectionPosts(props) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [sectionData, setSectionData ] = useState([{},{},{}]) ; //list of posts
 
-  const sectionData = props.postData; //list
-  
+  useEffect(() => {
+    setSectionData(props.sectionData);
+  }, [props.sectionData]);
+
   useEffect(() => {
     function handleResize() {
       setScreenWidth(window.innerWidth);
@@ -19,10 +22,11 @@ export default function SectionPosts(props) {
     return () => window.removeEventListener('resize', handleResize);
   });
 
-  
   return (
     <div className='section-posts'>
-      <WidePostFrame postData={sectionData[0]}/>
+      {
+        sectionData[0]?  <WidePostFrame postData={sectionData[0]}/> : <div style={{width:'100%'}}></div>
+      }
       {
         screenWidth < widthToChangeToSquarePosts ?
         <>

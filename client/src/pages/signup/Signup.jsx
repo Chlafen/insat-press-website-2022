@@ -82,7 +82,7 @@ export default function Signup() {
       <div className="grid">
         <form onSubmit={register}>
           <div className="signup-form">
-              <img  src={process.env.PUBLIC_URL + "logo.png" }alt="" />
+              <a href='/'><img  src={process.env.PUBLIC_URL + "logo.png" }alt="" /></a>
               <div className="form__field">
                 <label htmlFor="signup__fname">
                   <AiFillTag/>

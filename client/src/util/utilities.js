@@ -52,7 +52,8 @@ export function useQuery() {
 }
 
 export function convertSqlDateToJsDate(sqlDate) {
-  const date = new Date(sqlDate.toString().slice(0, 10).replace('-', '/'));
+  const date = new Date(sqlDate.toString().slice(0, 10).replaceAll('-', '/'));
+ 
   return date;
 }
 
@@ -77,3 +78,7 @@ export function  validateEmail(email) {
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
+
+export function random(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}

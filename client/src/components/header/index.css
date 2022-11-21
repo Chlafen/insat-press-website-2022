@@ -5,12 +5,13 @@
   left: 0;
   padding: 0 200px;
   max-height: 400px;
-  background-color: rgba(0, 0, 0, 0.336);
+  background-color: rgba(0, 0, 0, 0.671);
   font-size: clamp(0.8rem, 0.6000rem + 0.8000vw, 1rem);;
   font-family: Karla;
   backdrop-filter: blur(15px);
   color: white;
   z-index: 9999;
+  margin: 0!important;
 }
 
 .bgr-header-c{
@@ -40,10 +41,11 @@
 
 @-moz-document url-prefix(){
   .header{
-    background-color:rgb(46, 46, 46);
+    background-color:rgb(26, 26, 26);
   }
-  .nav-bar{
-    background-color:rgb(46, 46, 46);
+  .nav-bar{    
+    background-color:rgb(26, 26, 26);
+
   }
 }
 

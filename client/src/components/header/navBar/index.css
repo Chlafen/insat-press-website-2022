@@ -1,9 +1,9 @@
 .nav-bar {
-  /* display:flex;
+  display:flex;
   justify-content:flex-start;
-  align-items:center;
-  text-align:left;
-  gap: clamp(5px, 2vw, 15px); */
+  flex-direction: row;
+  align-items:space-between;
+  text-align:left; 
   position: relative;
   /* padding: clamp(0px, 1vw, 10px)0px; */
 }
@@ -12,6 +12,9 @@
     background-color:rgb(46, 46, 46);
   }
 }
+
+
+
 
 .nav-bar a, .nav-list>div{
   text-decoration: none;
@@ -121,13 +124,15 @@ nav{
 
 .sub-menu{
   display:block;
+  text-align: center;
+
   opacity: 0;
   visibility: hidden;
   position: absolute;
   left: 0;
   right: 0;
   gap: 1rem;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.85);
   z-index: 100;
   top: 150%;
   transition: all 100ms ease;
@@ -146,6 +151,12 @@ nav{
 
 
 @media screen and (max-width: 800px) {
+
+  .filler-for-symmetry{
+    flex-grow: 1;
+    aspect-ratio: 1;
+    height: 4rem;
+  }
   .header{
     padding: 0;
   }
@@ -153,7 +164,7 @@ nav{
     margin-left: .4rem;
   }
   .nav-logo{
-    height: 4rem;
+    height: 3rem;
   
   }
   .nav-list {
@@ -173,7 +184,7 @@ nav{
   }
   
   .close-menu > .nav-logo> img {
-    width: clamp(50px, 5vw, 80px);
+    width: clamp(40px, 5vw, 70px);
     display: block;
   }
   .open-menu > .nav-logo> img {
@@ -208,14 +219,15 @@ nav{
   }
 
   .nav-bar{
-    background-color: rgba(0, 0, 0, 0.452);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index:10;
     width:100vw;
     left: 0;
   }
   @-moz-document url-prefix(){
     .nav-bar{
-      background-color:rgb(30, 30, 29);
+    background-color:rgb(26, 26, 26);
+      
     }
   }
   .close-menu {
@@ -235,7 +247,7 @@ nav{
     height:100vh;
     width:max-content;
     flex-direction: column;
-    background-color:rgb(27, 27, 27);
+    background-color:rgb(17, 17, 17);
     align-items: initial;
     z-index: 1000;
     overflow:scroll;

@@ -7,7 +7,7 @@ exports.getAll = async (limit, result) => {
     attributes: ["category_name", "category_slug"],
     limit: limit,
   }).catch((err) => {
-    console.log(err);    
+    console.log(__errlogclr, err);    
     return result(responseHandler(false, 500, 'Something went wrong!', null), null);
   });
 

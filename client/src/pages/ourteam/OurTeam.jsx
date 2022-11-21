@@ -2,34 +2,37 @@ import React, { useEffect, useState } from 'react'
 import './index.css'
 import SectionTitle from '../../components/section-title/SectionTitle';
 import Card from './card/Card';
-import { apiGet } from '../../util/apiUtilities';
+import { getTopTeam } from '../../util/apiUtilities';
 
-const User = {
-  user_id : 1,
-  user_title: 'Story teller',
-  user_photo: '/uploads/image/users/user_1.jpg',
-  display_name: 'Mohamed Amine Bouchnak',
-  post_views: '1.2k',
-  post_number: '55',
+
+const userTypeMap = {
+  admin :1,
+  editor:2,
+  user  :3,
+  webmaster:4
 }
 
 
 export default function OurTeam() {
-  const [ authors, setAuthors] = useState([]);
-  const [photographers, setPhotographers] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  // const [photographers, setPhotographers] = useState([]);
   const [webmasters, setWebmasters] = useState([]); 
   
-  //get list of team from server
+  //get list of webmasters
   useEffect(() => {
-     apiGet('/api/users/team/authors?limit=10')
-      .then(res => {authors.push(...res.data.data)})
-      .catch(err => console.log(err));
-      apiGet('/api/users/team/photographers?limit=10')
-      .then(res => {photographers.push(...res.data.data)})
-      .catch(err => console.log(err));
-      apiGet('/api/users/team/webmasters?limit=10')
-      .then(res => {webmasters.push(...res.data.data)})
-      .catch(err => console.log(err));
+    getTopTeam(10, userTypeMap.webmaster).then((team) => {
+      setWebmasters(team);
+      console.log(team);
+    })
+
+  }, []);
+
+  //get list of authors
+  useEffect(() => {
+    getTopTeam(10, userTypeMap.editor).then((team) => {
+      setAuthors(team);
+      console.log(team);
+    })
   }, []);
 
 
@@ -54,7 +57,7 @@ export default function OurTeam() {
             
           </div>
         </div>
-        <div className="our-team-photographers our-team-scn">
+        {/* <div className="our-team-photographers our-team-scn">
           <SectionTitle title="PHOTOGRAPHERS"/>
           <div className="list-team">
             <div className="box-toleft">
@@ -63,12 +66,12 @@ export default function OurTeam() {
             {photographers.map((user, index) => <Card right='bdr-right' key={index} ranking={index+1} user={user}/> )}
             
           </div>
-        </div>
+        </div> */}
         <div className="our-team-webmaster our-team-scn">
           <SectionTitle title="WEBMASTERS"/>
           <div className="list-team">
-            <div className="box-toright">
-              <span>BEST OF</span><span> THE BEST</span>
+            <div className="box-toleft">
+              <span>OUR</span><span>WEB</span><span>MASTERS</span>
             </div>
             {webmasters.map((user, index) => <Card key={index} ranking={ 1} user={user}/> )}
             

@@ -8,7 +8,7 @@ const responseHandler = (success, code = 400, message = 'valid', data) => ({
 const asyncHandler = (fn) => (req, res, next) => Promise
   .resolve(fn(req, res, next))
   .catch((error) => {
-    console.log(error);
+    console.log(__errlogclr, error);
     responseHandler(false, 500, 'Something went wrong', null);
   });
 

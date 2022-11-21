@@ -2,27 +2,14 @@ import React, {useState, useEffect} from 'react';
 import './index.css';
 import LatestNews from './latest-news/LatestNews';
 import TopPostMain from './top-post-main/TopPostMain';
-
+import {getPostByDate} from '../../../util/articleRequests'
+import format from '../../../util/format';
+import Testpostframe from '../../../components/post-frames/test-post-frame/TestPostFrame';
 const maxWidthToPopLatesNews = 800;
-
-const postData0 = {
+ 
+const postData = {
   title: 'Project Axis, a new axis newly created by IEEE INSAT',
   category: 'Football',
-  timeOfPost: new Date(),
-  author: 'Nessrine Baltouni',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-  img: {
-    imgUrl: 'images/post1.jpg',
-    alt: 'A picture'
-  },
-  views: 158,
-  comments: 15,
-  url: '/'
-}
-
-const postData1 = {
-  title: 'Lorem ipsum axis newly created by IEEE INSAT',
-  category: 'Sports',
   timeOfPost: new Date(),
   author: 'Nessrine Baltouni',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
@@ -35,28 +22,14 @@ const postData1 = {
   url: '/'
 }
 
-const postData2 = {
-  title: 'Pconsectetur adipiscing elit, sed do eiusmod te incidunt',
-  category: 'Science',
-  timeOfPost: new Date(),
-  author: 'Nessrine Baltouni',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-  img: {
-    imgUrl: 'images/post2.jpg',
-    alt: 'A picture'
-  },
-  views: 158,
-  comments: 15,
-  url: '/'
-}
 const cycleTime = 6000;
+const length = 3; //nb of  posts to show
 
 export default function TopPost(props) {
   const [clientWidth, setClientWidth] = useState(document.documentElement.clientWidth);
   const [current, setCurrent] = useState(0);
-  const [pgbarWidth, setPgbarWidth] = useState(100/3);
-
-  const length = 3; //nb of the posts
+  const [pgbarWidth, setPgbarWidth] = useState(100/length);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     function handleResize() {
@@ -78,34 +51,52 @@ export default function TopPost(props) {
     return () => clearInterval(interval);
   });
 
-  const listData =[postData0, postData1, postData2];
+  // get posts
+
+  useEffect(() => {
+    getPostByDate(0, 12)
+      .then(posts => { 
+        let postsArray = [];
+        posts.forEach(post => {
+          postsArray.push(format(post));
+        });
+        setPosts(postsArray);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+ 
   return (
     <>
       <div className="top-post ">
         <div className="mid-section">
-        <div className="slider-imgs">
-          {listData.map((d, i) => {
-            return (
-              <div className={current === i ? "slide active" : "slide"} key={i} >
-                {i === current && (<img src={process.env.PUBLIC_URL + '/' + d.img.imgUrl} alt='img' className='slider-img'/>)}
-              </div>
-            )
-          })}
-        </div>
-          {listData.map((d, i) => {
-            return(
-              <TopPostMain postData={listData[i]} fade={current === i ? "slide-txt fade-in" : "slide-txt"} key={i}/>
-            )
-          })}
+          <div className="slider-imgs">
+            { posts && posts.slice(0, 3).map((d, i) => {
+              return (
+                <div className={current === i ? "slide active" : "slide"} key={i} >
+                  {i === current && (<img src={( d.image_path || '')} alt='img' className='slider-img'/>)}
+                </div>
+              )
+            })}
+          </div>
+          {posts.slice(0, 3).map((d, i) => 
+            <TopPostMain postData={posts[i]} fade={current === i ? "slide-txt fade-in" : "slide-txt"} key={i}/> 
+          )}
+          <div className="side-section">
+            {posts.slice(6,).map((post, i)=>
+                <Testpostframe postData={post} white={true} key={i}/>
+            )}
+          </div>
           {/* <ProgressBar/> */}
           <div className="progress-bar">
             <div id="evolving-bar"></div>
           </div>
-          {clientWidth >maxWidthToPopLatesNews && <LatestNews postData={listData}/>}
+            {posts.length > 0 && clientWidth >maxWidthToPopLatesNews && <LatestNews postData={posts.slice(3,6)}/>}
         </div>
         
       </div>
-      {clientWidth <=maxWidthToPopLatesNews && <LatestNews postData={listData} style={{"margin-top":".3rem"}}/>}
+      {posts.length > 0 && clientWidth <=maxWidthToPopLatesNews && <LatestNews postData={posts.slice(3,6)} style={{"margin-top":".3rem"}}/>}
     </>
   )
 }

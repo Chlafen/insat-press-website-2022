@@ -8,7 +8,7 @@ const navScrollDistance = 200;//the distance in px after whitch the top-header d
 function Header(props) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(props.displayTop==="true");
+  const [visible, setVisible] = useState(props.displayTop === true);
 
   useEffect(() => {
     if(props.displayTop==="false")
@@ -46,7 +46,7 @@ function Header(props) {
       <div className='wrapper-header'>
         {(screenWidth>800 && visible) &&<TopHeader/>}
         <hr/>
-        <NavBar/>
+        <NavBar categories={props.categories}/>
         <hr/>
       </div>
     </div>

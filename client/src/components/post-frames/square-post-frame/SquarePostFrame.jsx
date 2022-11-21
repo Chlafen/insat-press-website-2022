@@ -1,27 +1,23 @@
 import React from 'react';
-import postDataTemplate from '../postDataTemplate';
 import './index.css'
-import {timeSince} from '../../../util/utilities'
 import {AiFillPlayCircle} from 'react-icons/ai'
 
+
 export default function SquarePostFrame(props) {
-
-
-  function getTimeSincePosted(){
-    const timePosted = props.postData.timeOfPost;
-
-    return timeSince(timePosted) + ""||'';
-  }
-
-  return (
-    <a className="square-post-frame" href={props.postData.url}>
+  if( !props.postData) return <></>
+  let vidId ='';
+  if(props.isVideo)
+    vidId = props.postData.url.split('v=')[1];
+  let link =  props.isVideo ? '/video?v='+vidId : "/post?pid="+props.postData.post_id;
+  return props.postData?(
+    <a className="square-post-frame" href={link}>
       <div className="square-post-frame-img">
         {
         props.isVideo? 
           (<AiFillPlayCircle className='play-btn' color='var(--clr-red)' size='30%'/>)
           :''
         }
-        <img src={props.postData.img.imgUrl || ''} alt={props.postData.img.imgAlt || ''} />
+        <img src={props.postData.image_path || ''} alt={''} />
       </div>
       <div className="square-post-frame-text">
         <h4>
@@ -29,14 +25,14 @@ export default function SquarePostFrame(props) {
         </h4>
         <div className="square-post-frame-bottom">
           <span className="time-since-posted">
-            {getTimeSincePosted() + " ago"}
+            { props.isVideo?'': props.postData.createdAt + " ago"}
             </span>
           <span className="square-post-frame-category">
-            {props.postData.category || ''}
+            { props.isVideo?'':(props.postData.category || '')}
           </span>
         </div>
       </div>
     </a>
-  );
+  ):<></>;
 }
 

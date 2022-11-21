@@ -7,6 +7,7 @@ dotenv.config();
 
 const sequelize = new Sequelize(config.db.database, config.db.user, config.db.password, 
   {
+    logging: false,
     dialect: 'mysql',
     host: config.db.host, 
     define: {
@@ -18,6 +19,6 @@ const sequelize = new Sequelize(config.db.database, config.db.user, config.db.pa
 
 
 
-(async () => await sequelize.sync().catch( err => {console.log(err);} ))();
+(async () => await sequelize.sync().catch( err => {console.log(__errlogclr, err);} ))();
 
 module.exports = sequelize;

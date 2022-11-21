@@ -175,6 +175,9 @@
   .slider-left{
     margin: 0.5rem;
   }
+  .slide-story-txt.story-fade-in{
+    align-self: center;
+  }
 }
 
 @media screen and (max-width:540px) {

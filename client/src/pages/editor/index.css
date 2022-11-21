@@ -6,10 +6,10 @@
   min-width: 11rem;
 }
 
-.public-DraftStyleDefault-block{
+/* .public-DraftStyleDefault-block{
   font-weight: bolder !important;
 
-}
+} */
 .rdw-editor-toolbar{
   border-radius: 0.4rem !important;
   border-color: black !important;
@@ -119,12 +119,20 @@ a:visited{
 .rdw-image-imagewrapper > img {
   display: flex !important;
   flex-direction: column-reverse !important;
-  width: 100% !important;
-  aspect-ratio: calc(20/9) !important;
-  object-fit: cover !important;
+  max-width: 100% !important;
+  /* aspect-ratio: calc(20/9) !important; */
+  object-fit: cover  !important;
 }
 
 .rdw-wrapper-2450{
   display: flex !important;
   flex-direction: column-reverse !important;
+}
+
+.p-category-select{
+  text-transform: uppercase!important;
+}
+.p-category-select  .css-qc6sy-singleValue{
+  color: var(--clr-red) !important;
+  font-weight: bold;
 }

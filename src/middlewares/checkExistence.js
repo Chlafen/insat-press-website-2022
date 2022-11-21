@@ -13,7 +13,7 @@ const checkExistence = async (req, res, next) => {
     },
   })
     .catch((err) => {
-      console.log(err);
+      console.log(__errlogclr, err);
       return res
         .status(err.statusCode)
         .json(responseHandler(false, err.statusCode, 'Server Error', null));

@@ -11,6 +11,7 @@
   display: flex;
   transition: filter 170ms ease-in-out;
   position: relative;
+  background-color: #707070;
 }
 
 .square-post-frame-img>img{
@@ -53,6 +54,7 @@
   bottom: 35%;
   right:  35%;
   left:   35%;
+  aspect-ratio: 1/1;
   background-color: white;
   border-radius: 50%;
 }
@@ -60,9 +62,22 @@
 @media screen and (max-width:800px) {
   .square-post-frame-img>img {
     width:  clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem);
+    /* max-width: 200px; */
+    flex-grow: 1;
+    /* width: max-content; */
     height: clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem);
+
   }
   .square-post-frame-text {
     font-size: clamp(0.9rem, 0.0818rem + 3.6364vw, 1.9rem);
   }
 }
+
+@media screen and (max-width:480px) {
+  .square-post-frame-img>img {
+    width:  clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem); 
+    flex-grow: 0; 
+    height: clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem);
+
+  } 
+} 

@@ -1,0 +1,159 @@
+.user-public{
+  font-family: "Karla", sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1.5rem;
+
+  .user-header-container{
+    padding: 0 120px;
+    width: 100%;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+    .profile-header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center; 
+      width: 100%;
+      gap: 4rem;
+  
+      .profile-header-left{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: start;
+        gap: 1rem; 
+        .profile-header-img{
+          aspect-ratio: 1;
+          position: relative;
+          border-radius: 50%;
+          height: clamp(4rem, 1.8400rem + 9.6000vw, 7rem);
+          overflow: hidden;
+          img{
+            border: 2px solid white;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: gray;
+            border-radius: 50%;
+          }
+          .edit-img{
+            position: absolute;
+            bottom: 4%;
+            right: 4%; 
+            color: white;
+            font-size: 1.3rem;
+            background-color: var(--clr-red);
+            border-radius: 50%;
+            aspect-ratio: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3px;
+            cursor: pointer;
+          }
+    
+        }
+    
+        .profile-header-info{
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+    
+          .profile-username{ 
+            color: rgb(187, 187, 187);
+            font-size: clamp(0.8rem, 0.6560rem + 0.6400vw, 1rem);;
+          }
+    
+          .profile-name{
+            margin:0;
+            font-size: clamp(1.3rem, 0.4360rem + 3.8400vw, 2.5rem);
+          }
+        }
+      }
+  
+      .user-statistics{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start; 
+        align-items: center;
+        width: min-content;
+        
+        gap: clamp(0.7rem, -0.5960rem + 5.7600vw, 2.5rem);
+        flex-wrap: wrap;
+  
+        .user-views{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          font-size: clamp(1rem, 0.2800rem + 3.2000vw, 2rem);
+          gap: 1rem;
+          color: rgb(88, 88, 88);
+          p{ 
+            font-size: clamp(1rem, 0.2800rem + 3.2000vw, 2rem);
+          }
+        }
+        .user-posts{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+          font-size: clamp(1rem, 0.2800rem + 3.2000vw, 2rem);
+          color: rgb(88, 88, 88);
+          p{ 
+            font-size: clamp(1rem, 0.2800rem + 3.2000vw, 2rem);
+          }
+        }
+      }
+    }
+    .horizontal-sep{
+      width: 100%;
+      height: 1px;
+      background-color: rgb(187, 187, 187);
+    }
+  }
+
+  .user-section-container{
+    width: 100%;
+    .section-posts{
+      
+      margin-bottom: calc(.6rem + 1vw);
+    }
+
+  }
+}
+
+@media screen and (max-width:1240px) {
+  .user-public {
+    .user-header-container{
+      padding: calc(4rem + 15vw) calc(2rem + 2vw) ;
+      padding: 1rem;
+      gap: clamp(1rem, 0.5091rem + 2.1818vw, 2.2rem);
+    }
+  } 
+}
+
+@media screen and (max-width:800px) {
+  .user-public{
+    .user-header-container{
+      padding-right: 1rem;
+      padding-left : 1rem;
+    }
+  }
+}
+
+@media screen and  (max-width:500px)  {
+  .user-public{
+    .user-header-container{
+      padding-left: 0.23rem;
+      padding-right: 0.23rem;
+    }
+  }
+}

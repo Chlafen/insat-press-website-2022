@@ -1,14 +1,14 @@
 if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-console.log(`ENVIRONMENT VARIABLE '${"pwd"}' = '${process.env.DB_PASS}'`);
+// console.log(`ENVIRONMENT VARIABLE '${"pwd"}' = '${process.env.DB_PASS}'`);
 
 const getEnvVariable = (key) => {
   const value = process.env[key];
   if (!value && process.env.NODE_ENV === 'production') {
     throw new Error(`ENVIRONMENT VARIABLE '${key}' NOT SPECIFIED.`);
   }
-  console.log(`ENVIRONMENT VARIABLE '${key}' = '${value}'`);
+  // console.log(`ENVIRONMENT VARIABLE '${key}' = '${value}'`);
   return value;
 };
 

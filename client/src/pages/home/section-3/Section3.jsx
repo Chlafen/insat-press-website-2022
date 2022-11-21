@@ -1,12 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import BigSquarePostFrame from '../../../components/post-frames/big-square-post-frame/BigSquarePostFrame';
 import SquarePostFrame from '../../../components/post-frames/square-post-frame/SquarePostFrame';
+import { getCategoryPosts, getVideos } from '../../../util/articleRequests';
 import './index.css';
+import format from '../../../util/format';
+import VideoFrame from '../../../components/post-frames/video-frame/VideoFrame';
 
+const sectionCategory = 'unilife'
+const numberOfListItems = 5
 
 export default function Section3(props) {
 
-
+  const [posts, setPosts] = useState([]);
+  const [videos, setVideos] = useState([]);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  //get posts
+  useEffect(() => {
+    getCategoryPosts(sectionCategory, numberOfListItems + 1)
+      .then(posts => {
+        let postsArray = [];
+        posts.forEach(post => {
+          postsArray.push(format(post));
+        });
+        setPosts(postsArray);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+  //get vids 
+  useEffect(() => {
+    getVideos(numberOfListItems)
+      .then(videos => {
+        let newvids = [];
+        videos.map(vid => {
+          let a = {
+            image_path: vid.thumbnail,
+            title: vid.title,
+            url: vid.url,
+          }
+          newvids.push(a);
+        });
+        setVideos(newvids);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+  //get screen width
+  useEffect(() => {
+    const handleResize = () => {
+      setScreenWidth(window.innerWidth);
+    }
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    }
+  }, []);
   return (
     <div className="section-3">
       <div className="section-3-left">
@@ -16,15 +66,14 @@ export default function Section3(props) {
         <div className="top-left-sep"></div>
         <div className="section-3-left-posts">
           <div className="section-3-big">
-            <BigSquarePostFrame postData={props.postData}/>
+            {posts.length > 0 ? <BigSquarePostFrame postData={posts[0]} /> : ''}
           </div>
           <div className="section-3-post-list section-3-list">
-            <SquarePostFrame postData={props.postData}/>
-            <SquarePostFrame postData={props.postData}/>
-            <SquarePostFrame postData={props.postData}/>
-            <SquarePostFrame postData={props.postData}/>
-            <SquarePostFrame postData={props.postData}/>
-            <SquarePostFrame postData={props.postData}/>
+            {
+              posts.slice(1).map((post, i) => {
+                return <SquarePostFrame key={i} postData={post}/>
+              })
+            }
           </div>
         </div>
       </div>
@@ -37,14 +86,24 @@ export default function Section3(props) {
             VIDEOS
           </p>
         </div>
-        <div className="vid-pic-list section-3-list">
-          <SquarePostFrame isVideo={true} postData={props.postData}/>
-          <SquarePostFrame isVideo={true} postData={props.postData}/>
-          <SquarePostFrame isVideo={true} postData={props.postData}/>
-          <SquarePostFrame isVideo={true} postData={props.postData}/>
-          <SquarePostFrame isVideo={true} postData={props.postData}/>
-          <SquarePostFrame isVideo={true} postData={props.postData}/>
-        </div>
+        {
+          screenWidth > 1100 ?  
+            <div className="section-3-post-list section-3-list">
+              {
+                videos.map((vid, i) => {
+                  return <SquarePostFrame key={i} postData={vid || {}} isVideo={true}/>
+                })
+              }
+            </div>
+          : 
+            <div className="vid-pic-list section-3-list">
+              {
+                videos.map((vid, i) => {
+                  return <VideoFrame key={i} postData={vid}/>
+                })
+              }
+            </div>
+        }
       </div>
     </div>
   )

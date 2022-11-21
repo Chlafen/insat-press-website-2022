@@ -1,17 +1,17 @@
 import axios from 'axios';
 
-export function apiPost(url, params={}){
+export async function apiPost(url, params={}, contentType='') {
     const user = localStorage.getItem('user');
   
     let headers;
     if(user){
       headers = {
         "x-access-token": JSON.parse(user).accessToken,
-        'Content-Type': 'application/json'
+        'Content-Type': contentType || 'application/json'
       }
     }
     else {
-      headers = {'Content-Type': 'application/json'};
+      headers = {'Content-Type': contentType || 'application/json'};
     }
     return axios.post(
       url,
@@ -22,7 +22,7 @@ export function apiPost(url, params={}){
     );
   }
   
-  export function apiGet(url, params={}){
+  export async function apiGet(url, params={}){
     const user = localStorage.getItem('user');
   
     let headers;
@@ -43,7 +43,7 @@ export function apiPost(url, params={}){
     );
   }
   
-  export function getUserInfo(){
+  export async function getUserInfo(){
     return apiGet('/api/users/userinfo')
       .then((resp)=>{
         if(resp.status === 200){
@@ -52,7 +52,49 @@ export function apiPost(url, params={}){
         return null;
       })
       .catch((err)=>{
-        console.log(err.response)
+        console.log("user info error,", err);
+        console.log(err.response);
+        localStorage.removeItem('user');
+        return null;
+      })
+  }
+
+  /**
+   * 
+   * @param {*} limit [if not specified then 10]
+   * @param {*} teamType [if not specified then all types]
+   * @returns {*} [returns array of top $limit users based on post count]
+   */
+  export async function getTopTeam(limit=10, teamType=-1){
+    return apiGet('/api/users/team', {limit: limit, type: teamType})
+      .then((resp)=>{
+        if(resp.status === 200){
+          return resp.data.data;
+        }
+        return null;
+      })
+      .catch((err)=>{
+        console.log("top team error,", err);
+        console.log(err.response);
+        return null;
+      })
+  }
+
+  /**
+   * 
+   * @description [returns public user info for a given user id]
+  */
+  export async function getOneUser(id){
+    return apiGet('/api/users/'+id)
+      .then((resp)=>{
+        if(resp.status === 200){
+          return resp.data.data;
+        }
+        return null;
+      })
+      .catch((err)=>{
+        console.log("user info error,", err);
+        console.log(err.response);
         return null;
       })
   }
