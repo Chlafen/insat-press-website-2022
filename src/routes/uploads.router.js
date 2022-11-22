@@ -31,10 +31,6 @@ router.route('/')
 
 router.route('/*')
   .delete(
-    (req, res, next) => {
-      console.log(req);
-      next();
-    },
     auth.isUserAuthed,
     (req, res) => {
       console.log(req.body);
