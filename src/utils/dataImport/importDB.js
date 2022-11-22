@@ -1,3 +1,5 @@
+if(process.env.NODE_ENV === 'development') {
+
 const { 
     PostModel,
     UserModel,
@@ -52,4 +54,6 @@ if(IMPORT){
     post_categories.forEach((post_cat)=>{
         PostCategoryModel.create(post_cat);
     });
+}
+
 }
