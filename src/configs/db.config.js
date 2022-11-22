@@ -19,6 +19,6 @@ const sequelize = new Sequelize(config.db.database, config.db.user, config.db.pa
 
 
 
-(async () => await sequelize.sync().catch( err => {console.log(__errlogclr, err);} ))();
+(async () => await sequelize.sync().catch( err => {console.log(err);} ))();
 
 module.exports = sequelize;
