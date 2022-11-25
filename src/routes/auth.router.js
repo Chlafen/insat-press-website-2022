@@ -7,14 +7,11 @@ const router = express.Router();
 
 router.route('/login')
   .post(
-    isUserAuthed,
-    verifyAccess(-1), // Guest
     authController.login,
   );
 
 router.route('/verify/*')
   .get(
-    isUserAuthed,
     authController.verifyEmail,
   );
 

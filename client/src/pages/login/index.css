@@ -227,3 +227,13 @@
 .text--center a {
   color: #eee; 
 }
+
+.signup-error{ 
+  font-weight: 700;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.signup-error svg{
+  color: #be2623!important;  
+}

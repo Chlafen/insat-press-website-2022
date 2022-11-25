@@ -4,7 +4,7 @@ import { MdLogin, MdLock, MdArrowRight } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/authContext';
 import { apiPost } from '../../util/apiUtilities';
-
+import {RiErrorWarningFill} from 'react-icons/ri'
 export default function Login() {
   const [login, setLogin] = useState({});
   const [error , setError] = useState('');
@@ -21,7 +21,6 @@ export default function Login() {
 
   const submitLogin = async (e) => {
     e.preventDefault(); 
-    console.log("hhh")
     if(login.username === '' || login.password === ''){
       setError('Please fill all the fields');
     }else{
@@ -63,7 +62,6 @@ export default function Login() {
                   className="form__input" 
                   placeholder="Username or Email" 
                   onChange={handleChange}
-                  required
                 />
               </div>
 
@@ -79,7 +77,6 @@ export default function Login() {
                   className="form__input" 
                   placeholder="Password" 
                   onChange={handleChange}
-                  required
                 />
               </div>
 
@@ -88,7 +85,11 @@ export default function Login() {
               </div>
           </div>
         </form>
-
+        <p className={'signup-error ' +( !error?'hidden-err':'')}>
+          {
+            error&&<><span><RiErrorWarningFill color='be2623'/>{error}</span><br/></>
+          }
+        </p>
         <p className="text--center">
           Not a member? 
           <Link to="/signup">Sign up now</Link> 

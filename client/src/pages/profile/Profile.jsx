@@ -127,7 +127,7 @@ const Profile = () => {
         </div>
       </div>
       <div className="horizontal-sep"></div>
-      <Link className="create-post-button" to="editor">Create Article</Link>
+      <Link className="create-post-button" to="/editor">Create Article</Link>
 
       <div className="head-navigator">
         <button id='head-btn-2' className={underL===1?'red-text':'gray-text'} >
