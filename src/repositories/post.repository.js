@@ -344,7 +344,7 @@ exports.getPostsByUser = async (userId, limit,fromSource=false, result) => {
 
 
   let queryResult = await PostModel.findAll({
-    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count'],
+    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count', 'type'],
     limit: limit,
     order: [['post_date', 'DESC']],
     where: where,

@@ -73,10 +73,11 @@ const Profile = () => {
             }
             tmpposts = [...tmpposts, post]
           })
+          console.log(res);
           let drafts    = res.filter((post)=>post.type === 'draft');
           let published = res.filter((post)=>post.type === 'public');
           let awaiting  = res.filter((post)=>post.type === 'unapproved');
-
+          console.log(drafts, published, awaiting);
           setArticles({drafts, published, awaiting});
           setViews(totviews);
           setPublished(totarticles);

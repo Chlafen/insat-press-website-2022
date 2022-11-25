@@ -1,0 +1,16 @@
+{
+  "post_content" : "",
+  "post_title"   : "",
+  "author_id"    : "",
+  "type"         : "",
+  "image_path"   : "",
+  "categories"   : {
+        "primary": "", 
+        "secondary":[]
+  },
+  "tags": [
+  ],
+  "attachments": [
+
+  ]
+}

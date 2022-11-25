@@ -1,0 +1,36 @@
+HOME:
+  headlines:
+    toggle between:
+      chosen by admin
+      automatic:
+        1 most viewed
+        2 latest
+  latest 3:
+    3-5 latest
+
+
+  1st section:
+    left:
+      latest:
+        latest 5-10 
+      popular:
+        5 most viewed
+      recommended:
+        random 50 latest *tochange
+    mid:
+      random between 5-10 latest
+    right:
+      most viewed from rand category
+
+      
+  stories:
+    latest 6 story category
+  2nd section:
+    latest 7 events
+  categories:
+    latest from each
+
+post_types:
+  public
+  draft
+  unapproved
