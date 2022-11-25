@@ -12,26 +12,26 @@ const getEnvVariable = (key) => {
   return value;
 };
 
+let config;
+
 if(getEnvVariable('RAILWAY') === 'true') {
   console.log('RAILWAY ENVIRONMENT DETECTED');
-  process.env.DB_HOST = getEnvVariable('MYSQLHOST');
-  process.env.DB_USER = getEnvVariable('MYSQLUSER');
-  process.env.DB_PASS = getEnvVariable('MYSQLPASSWORD');
-  process.env.DB_NAME = getEnvVariable('MYSQLDATABASE');
-  process.env.DB_PORT = getEnvVariable('MYSQLPORT');
+  config = {
+    db: {
+      url: getEnvVariable('MYSQL_URL'),
+    }
+  };
+}else {
+  config = {
+    db: {
+      host:     getEnvVariable("DB_HOST"),
+      user:     getEnvVariable("DB_USER"),
+      password: getEnvVariable("DB_PASS"),
+      database: getEnvVariable("DB_NAME"),
+      port:     getEnvVariable("DB_PORT"),
+    }
+  };
 }
-
-const config = {
-  db: {
-    dialect:  'mysql',
-    host:     getEnvVariable("DB_HOST"),
-    user:     getEnvVariable("DB_USER"),
-    password: getEnvVariable("DB_PASS"),
-    database: getEnvVariable("DB_NAME"),
-    port:     getEnvVariable("DB_PORT"),
-  }
-};
-
 
 
 module.exports = config;

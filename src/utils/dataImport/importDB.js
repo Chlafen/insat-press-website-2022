@@ -24,7 +24,7 @@ const post_categories = require('./oldDB/post_categories.json');
 // Needs to create tables first.
 // Set to false then start server to create tables.
 // Set to false & run again to import.
-const IMPORT = false;
+const IMPORT = process.env.IMPORT_DB || false;
 
 if(IMPORT){
     userTypes.forEach((type)=>{

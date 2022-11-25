@@ -22,18 +22,16 @@ app.use(express.static(path.join(__dirname, "uploads")));
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 //requests logger middleware
-if(process.env.NODE_ENV === 'development') {
-  console.log(process.env.NODE_ENV);
-  app.use((req, res, next) => {
-    console.log("\n\x1b[32m%s\x1b[0m request for \x1b[36m%s \n\x1b[0m--body:  \x1b[33m%s\x1b[0m",
-      req.method, req.originalUrl, JSON.stringify(req.body)
-    );
-    //log query params
-    console.log("--query: \x1b[35m%s\x1b[0m", JSON.stringify(req.query));
-    
-    next();
-  });
-}
+app.use((req, res, next) => {
+  console.log("\n\x1b[32m%s\x1b[0m request for \x1b[36m%s \n\x1b[0m--body:  \x1b[33m%s\x1b[0m",
+    req.method, req.originalUrl, JSON.stringify(req.body)
+  );
+  //log query params
+  console.log("--query: \x1b[35m%s\x1b[0m", JSON.stringify(req.query));
+  
+  next();
+});
+
 
 app.use('/api', index);
 app.use('/uploads', indexupload);

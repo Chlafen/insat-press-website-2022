@@ -17,7 +17,6 @@ router.route('/register')
   .post(
     check('username', 'Please include a valid username').isLength({ min: 5 }),
     check('password', 'Please enter a password with 5 or more characters').isLength({ min: 7 }),
-    isUserAuthed,
     checkExistence,
     userController.register
     );
