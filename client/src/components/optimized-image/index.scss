@@ -1,0 +1,18 @@
+$clr1:rgb(136, 136, 136);
+$clr2:rgb(170, 170, 170);
+.wave-effect{
+  background-color: rgb(99, 99, 99);
+  animation: wave 3.6s infinite;
+}
+
+@keyframes wave {
+  0% {
+    background-color: $clr1;
+  }
+  50% {
+    background-color: $clr2;
+  }
+  100% {
+    background-color: $clr1;
+  }
+}

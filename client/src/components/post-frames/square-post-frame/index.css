@@ -11,10 +11,9 @@
   display: flex;
   transition: filter 170ms ease-in-out;
   position: relative;
-  background-color: #707070;
 }
 
-.square-post-frame-img>img{
+.square-post-frame-img>div{
   width:  5.5rem;
   height: 5.5rem;
   object-fit:cover;
@@ -60,7 +59,7 @@
 }
 
 @media screen and (max-width:800px) {
-  .square-post-frame-img>img {
+  .square-post-frame-img>div {
     width:  clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem);
     /* max-width: 200px; */
     flex-grow: 1;
@@ -74,7 +73,7 @@
 }
 
 @media screen and (max-width:480px) {
-  .square-post-frame-img>img {
+  .square-post-frame-img>div {
     width:  clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem); 
     flex-grow: 0; 
     height: clamp(5.5rem, 4.2727rem + 5.4545vw, 7rem);

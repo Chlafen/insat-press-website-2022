@@ -3,6 +3,7 @@ import './index.scss';
 import {AiFillDelete, AiFillEdit} from 'react-icons/ai';
 import {FiUpload} from 'react-icons/fi';  
 import { deletePost, publishPost } from '../../../util/articleRequests';
+import OptimizedImage from '../../optimized-image/OptimizedImage';
 
 const UserPostFrame = (props) => {
   const [postData, setPostData] = useState(null);
@@ -61,13 +62,16 @@ const UserPostFrame = (props) => {
 
   return (
     <div className="user-post-frame">
-      <div className="user-post-info">
+      <a className="user-post-info" href={'/post?pid=' + postData?.post_id }>
         <div className="user-post-image">
-          <img src={postData?.image_path} alt="" />
+          <OptimizedImage
+            url={postData?.image_path}
+            blurhash={postData?.blurhash}
+          />
         </div>
         <p className="user-post-title">{postData?.post_title.slice(0,screenWidth / 10).trim() + 
           (postData?.post_title.trim().length > screenWidth / 10 ? '...':'')}</p>
-      </div>
+      </a>
       <div className="user-post-right">
         <span className="user-post-postdate">{ postData?.post_date.slice(0, 10)}</span>
         <div className="user-post-controls">

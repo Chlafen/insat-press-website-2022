@@ -14,7 +14,7 @@
   background-color: #696969;
 }
 
-.wide-post-img > img{
+.wide-post-img > div{
   object-fit: cover;
   width: 100%;
   aspect-ratio: calc(16 / 9);
@@ -91,7 +91,7 @@
   color: var(--clr-red);
 }
 
-.wide-post-container:hover .wide-post-img>img {
+.wide-post-container:hover .wide-post-img>div {
   transform: scale(1.08);
 }
 

@@ -170,7 +170,7 @@ exports.retrieveOne = async (postId, result) => {
   
   //retrieve post
   let queryResult = await PostModel.findOne({
-    attributes: ['post_content', 'post_title', 'image_path', 'post_date', 'view_count', 'type'],
+    attributes: ['post_content', 'post_title', 'image_path', 'post_date', 'view_count', 'type', 'blurhash'],
     distinct: true,
     where: {
       post_id: postId
@@ -204,7 +204,7 @@ exports.retrieveOne = async (postId, result) => {
 
 exports.getPostsByCategory = async (slug, limit, offset, result) => {
   let queryResult = await PostModel.findAll({
-    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count'],
+    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count', 'blurhash'],
     distinct: true, 
     limit: limit, 
     offset: offset,
@@ -278,7 +278,7 @@ exports.getVideos = async (limit, result) => {
 
 exports.getLatest = async (start, limit, result) => { 
   let queryResult = await PostModel.findAll({
-    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count'],
+    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count', 'blurhash'],
     offset: start,
     limit: limit,
     order: [['post_date', 'DESC']],
@@ -307,7 +307,7 @@ exports.getLatest = async (start, limit, result) => {
 
 exports.getPopular = async (start, limit, result) => {
   let queryResult = await PostModel.findAll({
-    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count'],
+    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count', 'blurhash'],
     offset: start,
     limit: limit,
     order: [['view_count', 'DESC']],
@@ -344,7 +344,7 @@ exports.getPostsByUser = async (userId, limit,fromSource=false, result) => {
 
 
   let queryResult = await PostModel.findAll({
-    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count', 'type'],
+    attributes: ['post_id', 'post_title', 'post_content', 'image_path', 'post_date', 'view_count', 'type', 'blurhash'],
     limit: limit,
     order: [['post_date', 'DESC']],
     where: where,

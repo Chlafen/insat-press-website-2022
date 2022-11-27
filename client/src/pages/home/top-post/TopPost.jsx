@@ -5,22 +5,10 @@ import TopPostMain from './top-post-main/TopPostMain';
 import {getPostByDate} from '../../../util/articleRequests'
 import format from '../../../util/format';
 import Testpostframe from '../../../components/post-frames/test-post-frame/TestPostFrame';
+import OptimizedImage from '../../../components/optimized-image/OptimizedImage';
 const maxWidthToPopLatesNews = 800;
  
-const postData = {
-  title: 'Project Axis, a new axis newly created by IEEE INSAT',
-  category: 'Football',
-  timeOfPost: new Date(),
-  author: 'Nessrine Baltouni',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-  img: {
-    imgUrl: 'images/post3.jpg',
-    alt: 'A picture'
-  },
-  views: 158,
-  comments: 15,
-  url: '/'
-}
+
 
 const cycleTime = 6000;
 const length = 3; //nb of  posts to show
@@ -75,7 +63,11 @@ export default function TopPost(props) {
             { posts && posts.slice(0, 3).map((d, i) => {
               return (
                 <div className={current === i ? "slide active" : "slide"} key={i} >
-                  {i === current && (<img src={( d.image_path || '')} alt='img' className='slider-img'/>)}
+                  <OptimizedImage
+                    url={d.image_path}
+                    blurhash={d.blurhash}
+                    style={{display: i===current ? 'block' : 'none', filter: 'brightness(0.5)'}}
+                  />
                 </div>
               )
             })}

@@ -12,21 +12,6 @@ import format from '../../util/format';
 import { getCategoryPosts } from '../../util/articleRequests';
 
 
-const postData = {
-  title: 'Project Axis, a new axis newly created by IEEE INSAT',
-  category: 'Football',
-  timeOfPost: new Date(),
-  author: 'Nessrine Baltouni',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam',
-  img: {
-    imgUrl: 'images/post3.jpg',
-    alt: 'A picture'
-  },
-  views: 158,
-  comments: 15,
-  url: '/'
-}
-
 const categNumber = 5;
 
 
@@ -83,7 +68,7 @@ const Home = () => {
   return (
     <div className="home">
       <TopPost  />
-      <HeadPosts postData={postData}/>
+      <HeadPosts/>
      
       <SliderStories/>
       <Section3/>

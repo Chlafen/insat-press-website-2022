@@ -15,6 +15,7 @@ export default function format(post) {
     profile_pic: post.user.profile_pic,
     author_username: post.user.username,
     image_path: post.image_path,
+    blurhash: post.blurhash,
     view_count: post.view_count, 
     content: '',
   }

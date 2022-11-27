@@ -2,6 +2,7 @@ import React from 'react';
 import './index.css'
 import {AiFillEye} from 'react-icons/ai';
 import {MdInsertComment} from 'react-icons/md'; 
+import OptimizedImage from '../../optimized-image/OptimizedImage';
 
 
 const WidePostFrame = (props) => { 
@@ -10,7 +11,10 @@ const WidePostFrame = (props) => {
   return (
     <a href={'/post?pid='+(props.postData.post_id || '')} className='wide-post-container'>
       <div className='wide-post-img'>
-        <img loading="lazy" src={props.postData.image_path || '' || 'https://via.placeholder.com/1'} alt='' />
+        <OptimizedImage
+          url={props.postData.image_path}
+          blurhash={props.postData.blurhash}
+        />
       </div>
       <div className='wide-post-info'>
         <div className='wide-post-title'>

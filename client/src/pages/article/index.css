@@ -82,7 +82,7 @@
   width:100%;
 }
 
-.p-image>img {
+.p-image>div {
   aspect-ratio: calc(20/9);
   width: 100%;
   object-fit: cover;

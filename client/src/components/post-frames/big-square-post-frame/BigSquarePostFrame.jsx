@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './index.css'; 
 import {AiFillEye} from 'react-icons/ai';
 import {MdInsertComment} from 'react-icons/md';
+import OptimizedImage from '../../optimized-image/OptimizedImage';
+import styled from 'styled-components';
+
+
 
 export default function BigSquarePostFrame(props) {
   const [postData, setPostData] = useState({});
@@ -17,6 +21,11 @@ export default function BigSquarePostFrame(props) {
   return (
     <div className='big-square-post-frame'>
       <a className="big-square-post-main" href={"/post?pid="+postData.post_id} style={style}>
+        <OptimizedImage
+          style={{position:'absolute', zIndex:1}} 
+          url={postData.image_path}
+          blurhash={postData.blurhash}
+        />
         <div className="content-wrapper">
           <h2>{postData.category || ''}</h2>
           <div className="big-square-post-bottom">

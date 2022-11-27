@@ -4,6 +4,7 @@ const router = express.Router();
 const { auth } = require("../middlewares");
 
 const fs = require('fs');
+const encodeImageToBlurhash = require('../utils/encodeImgToBlurhash');
 
 router.route('/')
   .post( 
@@ -23,9 +24,31 @@ router.route('/')
       const filepath = path.join(__basedir, 'uploads', year.toString(), month.toString(), fileName);
 
       console.log(filepath);
-      file.mv(filepath);
-      const fileurl = '/uploads/' + year.toString() + '/' + month.toString() + '/' + fileName ;
-      res.send(fileurl);
+      file.mv(filepath)
+        .then(() => {
+          const fileurl = '/uploads/' + year.toString() + '/' + month.toString() + '/' + fileName ;
+          let filedata = {
+            fileurl: fileurl,
+          }
+          encodeImageToBlurhash(filepath)
+            .then((blurhash) => {
+              filedata.blurhash = blurhash;
+              //save blurhash to db
+
+
+              console.log("data");
+              console.log(filedata);
+              return res.status(200).json(filedata);
+            })
+            .catch((err) => {
+              console.error(err);
+              return res.status(500).json({ msg: 'Server Error' });
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+          return res.status(500).json({ msg: 'Server Error' });
+        });
     }
   );
 
@@ -58,7 +81,19 @@ router.route('/*')
         res.status(404).send('File not found');
         return;
       }else{
-        res.sendFile(filepath);
+        //TODO: check if file is image
+        //TODO: get blurhash from db
+        encodeImageToBlurhash(filepath)
+          .then((blurhash) => {
+            res.status(200).json({ 
+              filepath: filepath,
+              blurhash: blurhash
+            });
+          })
+          .catch((err) => {
+            console.error(err);
+            res.status(500).send('Server Error');
+          });
       }
     })
   });

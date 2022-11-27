@@ -7,7 +7,7 @@ import {FaLongArrowAltRight} from 'react-icons/fa'
 import { getPostByDate, getPostByView } from '../../../util/articleRequests';
 import format from '../../../util/format';
 import { random } from '../../../util/utilities'; 
-export default function HeadPosts(props) {
+export default function HeadPosts() {
   const [underL, setUnderL] = useState(0);
   const [latestPosts, setLatestPosts] = useState([]);
   const [popularPosts, setPopularPosts] = useState([]);

@@ -23,5 +23,6 @@ export function formatPost(post) {
     view_count: post.view_count,
     avg: getAvgTimeToRead(post.post_content),
     content: parse(post.post_content),
+    blurhash: post.blurhash,
   }
 }

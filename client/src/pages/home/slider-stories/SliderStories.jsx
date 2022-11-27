@@ -6,13 +6,13 @@ import TopPostMain from '../top-post/top-post-main/TopPostMain';
 import { getCategoryPosts } from '../../../util/articleRequests';
 import {formatPost} from '../../article/fomratPost'
 import { textContent } from '../../../util/format';
+import OptimizedImage from '../../../components/optimized-image/OptimizedImage';
 
 const nbOfSlides = 8;
 
 const Sliderstories = () => {
   const [current, setSliderIndex] = useState(0);
   const [posts, setPosts] = useState([]);
-  const [content, setContent] = useState('');
 
   const inc = () => {
     if(current>=nbOfSlides-1){
@@ -55,7 +55,14 @@ const Sliderstories = () => {
         {posts.map((d, i) => {
           return (
             <div className={current === i ? "slide-story story-active" : "slide-story"} key={i} >
-              {i === current && (<img src={d.image_path} alt='img' className='slider-story-img'/>)}
+                <OptimizedImage
+                  url={d.image_path}
+                  blurhash={d.blurhash}
+                  className='slider-story-img'
+                  style={
+                    {display: i === current? 'block' : 'none', filter: 'brightness(0.5)'}
+                  }
+                />
             </div>
           )
         })}

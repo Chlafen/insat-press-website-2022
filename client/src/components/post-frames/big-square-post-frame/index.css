@@ -1,5 +1,4 @@
 .big-square-post-frame {
-  background-color: rgb(93, 89, 97);
   overflow: hidden;
   aspect-ratio: 1;
   height: 100%;
@@ -17,6 +16,7 @@
   background-size: cover;
   background-position: center;
   transition: transform 1s ease;
+  position: relative;
 } 
 
 .big-square-post-main:hover{
@@ -41,6 +41,7 @@
   width: 100%;
   transition: background-color 1s ease;
   height: 100%;
+  z-index: 2;
 }
 .big-square-post-main>.content-wrapper>h2{
   text-transform: uppercase;

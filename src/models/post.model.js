@@ -14,6 +14,7 @@ const Post = function (post) {
   this.tags = post.tags;
   this.categories = post.categories;
   this.attachments = post.attachments;
+  this.blurhash = post.blurhash;
 }
 
 const PostModel = db.define(
@@ -50,6 +51,11 @@ const PostModel = db.define(
       type: DataTypes.STRING(255),
       allowNull: false,
       defaultValue: 'uploads/default_post_bgr.jpg',
+    },
+    blurhash : {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      defaultValue: '',
     },
     type : {
       type: DataTypes.STRING(50),

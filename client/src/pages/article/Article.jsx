@@ -17,6 +17,7 @@ import { useQuery } from '../../util/utilities';
 import { apiGet } from '../../util/apiUtilities';
 import format from '../../util/format';
 import {getCategoryPosts} from '../../util/articleRequests';
+import OptimizedImage from '../../components/optimized-image/OptimizedImage';
 
 const iconSize = 30;
 
@@ -111,7 +112,10 @@ export default function Article() {
       {postData1.image_path?<>
         <div className="p-horizontal-sep"></div>
         <div className="p-image">
-          <img src={postData1.image_path} alt="" />
+          <OptimizedImage
+            url={postData1.image_path}
+            blurhash={postData1.blurhash}
+          />
         </div>  
         </>
         :null

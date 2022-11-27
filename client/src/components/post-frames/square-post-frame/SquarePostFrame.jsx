@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.css'
 import {AiFillPlayCircle} from 'react-icons/ai'
-
+import OptimizedImage from '../../optimized-image/OptimizedImage';
 
 export default function SquarePostFrame(props) {
   if( !props.postData) return <></>
@@ -17,7 +17,11 @@ export default function SquarePostFrame(props) {
           (<AiFillPlayCircle className='play-btn' color='var(--clr-red)' size='30%'/>)
           :''
         }
-        <img src={props.postData.image_path || ''} alt={''} />
+        <OptimizedImage
+          className='square-post-frame-img-img'
+          url={props.postData.image_path}
+          blurhash={props.postData.blurhash}
+        />
       </div>
       <div className="square-post-frame-text">
         <h4>

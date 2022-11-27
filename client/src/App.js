@@ -13,8 +13,6 @@ import Category from './pages/category/Category';
 
 const getCategories = async () => {
   const res = await apiGet('/api/categories');
-  console.log("categories");
-  console.log(res)
   return new Promise((resolve) => {
     resolve(
       res.data
